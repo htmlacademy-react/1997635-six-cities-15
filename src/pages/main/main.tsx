@@ -1,7 +1,11 @@
 import Header from '../../components/header/header';
 import Offers from '../../components/offer/offers';
 
-function MainPage() {
+type MainPageScreenProps = {
+  offersCount: number;
+}
+
+function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
   return (
     <>
       <Header />
@@ -63,7 +67,7 @@ function MainPage() {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <Offers />
+              <Offers offersCount={offersCount}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

@@ -1,9 +1,13 @@
 import Offer from './offer';
 
-function Offers () {
+type OffersScreenProps = {
+  offersCount: number;
+}
+
+function Offers ({offersCount}: OffersScreenProps): JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
-      {Array.from({length: 5}, () => Math.random()).map((v) => <Offer key={v}/>)}
+      {Array.from({length: offersCount}, () => Math.random()).map((v) => <Offer key={v}/>)}
     </div>
   );
 }
