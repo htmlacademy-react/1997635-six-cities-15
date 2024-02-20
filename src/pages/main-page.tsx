@@ -10,7 +10,7 @@ type MainPageScreenProps = {
 
 function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
   return (
-    <>
+    <div className="page page--gray page--main">
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -24,7 +24,7 @@ function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
+                  <svg className="places__sorting-arrow" width={7} height={4}>
                     <use xlinkHref="#icon-arrow-select"></use>
                   </svg>
                 </span>
@@ -36,7 +36,7 @@ function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
           </div>
         </div>
       </main>
-    </>
+    </div>
   );
 }
 

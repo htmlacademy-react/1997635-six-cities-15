@@ -20,7 +20,7 @@ function OfferPage () {
                   Beautiful &amp; luxurious studio at great location
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
+                  <svg className="offer__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -87,7 +87,7 @@ function OfferPage () {
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width={74} height={74} alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
                     Angelina
@@ -117,7 +117,7 @@ function OfferPage () {
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
+                    <img className="place-card__image" src="img/room.jpg" width={260} height={200} alt="Place image" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -127,7 +127,7 @@ function OfferPage () {
                       <span className="place-card__price-text">&#47;&nbsp;night</span>
                     </div>
                     <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-                      <svg className="place-card__bookmark-icon" width="18" height="19">
+                      <svg className="place-card__bookmark-icon" width={18} height={19}>
                         <use xlinkHref="#icon-bookmark"></use>
                       </svg>
                       <span className="visually-hidden">In bookmarks</span>
@@ -149,7 +149,7 @@ function OfferPage () {
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
+                    <img className="place-card__image" src="img/apartment-02.jpg" width={260} height={200} alt="Place image" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -159,7 +159,7 @@ function OfferPage () {
                       <span className="place-card__price-text">&#47;&nbsp;night</span>
                     </div>
                     <button className="place-card__bookmark-button button" type="button">
-                      <svg className="place-card__bookmark-icon" width="18" height="19">
+                      <svg className="place-card__bookmark-icon" width={18} height={19}>
                         <use xlinkHref="#icon-bookmark"></use>
                       </svg>
                       <span className="visually-hidden">To bookmarks</span>
@@ -184,7 +184,7 @@ function OfferPage () {
                 </div>
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image" />
+                    <img className="place-card__image" src="img/apartment-03.jpg" width={260} height={200} alt="Place image" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -194,7 +194,7 @@ function OfferPage () {
                       <span className="place-card__price-text">&#47;&nbsp;night</span>
                     </div>
                     <button className="place-card__bookmark-button button" type="button">
-                      <svg className="place-card__bookmark-icon" width="18" height="19">
+                      <svg className="place-card__bookmark-icon" width={18} height={19}>
                         <use xlinkHref="#icon-bookmark"></use>
                       </svg>
                       <span className="visually-hidden">To bookmarks</span>
