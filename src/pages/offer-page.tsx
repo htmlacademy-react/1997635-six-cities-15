@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
 import Review from '../components/review/review';
@@ -5,6 +6,9 @@ import Review from '../components/review/review';
 function OfferPage () {
   return (
     <main className="page__main page__main--offer">
+      <Helmet>
+        <title>6 cities: offer</title>
+      </Helmet>
       <section className="offer">
         <Gallery />
         <div className="offer__container container">
