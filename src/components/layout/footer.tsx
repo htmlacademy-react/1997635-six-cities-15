@@ -1,11 +1,20 @@
-function Footer () {
-  return (
-    <footer className="footer container">
-      <a className="footer__logo-link" href="main.html">
-        <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
-      </a>
-    </footer>
-  );
+import Logo from '../ui/logo';
+
+type FooterProps = {
+  shouldRenderFooter: boolean;
+}
+
+function Footer ({shouldRenderFooter} : FooterProps) {
+  if (shouldRenderFooter){
+    return (
+      <footer className="footer container">
+        <Logo
+          isHeader={false}
+          linkClassName=''
+        />
+      </footer>
+    );
+  }
 }
 
 export default Footer;

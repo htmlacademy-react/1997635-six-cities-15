@@ -1,13 +1,20 @@
 import Logo from '../ui/logo';
 import Navigation from './navigation/navigation';
 
-function Header () {
+type HeaderProps = {
+  linkClassName: string;
+  shouldRenderUser: boolean;
+}
+
+function Header ({linkClassName, shouldRenderUser} : HeaderProps) : JSX.Element {
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
-          <Logo />
-          <Navigation />
+          <div className="header__left">
+            <Logo linkClassName={linkClassName} isHeader/>
+          </div>
+          {shouldRenderUser && <Navigation />}
         </div>
       </div>
     </header>
