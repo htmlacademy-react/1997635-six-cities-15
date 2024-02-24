@@ -18,6 +18,19 @@ export const Locations = [
   'Dusseldorf'
 ] as const;
 
+export const OfferInsideItems = [
+  'Wi-Fi',
+  'Washing machine',
+  'Towels',
+  'Heating',
+  'Coffee machine',
+  'Baby seat',
+  'Kitchen',
+  'Dishwasher',
+  'Cabel TV',
+  'Fridge'
+] as const;
+
 export const GalleryImages = [
   {
     src: 'img/room.jpg',
@@ -44,3 +57,16 @@ export const GalleryImages = [
     alt: 'Photo studio'
   },
 ] as const;
+
+export enum AppRoute {
+  Main = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer',
+}
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
