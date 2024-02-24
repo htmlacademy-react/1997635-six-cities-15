@@ -33,7 +33,7 @@ function Layout () {
         shouldRenderUser={shouldRenderUser}
       />
       <Outlet />
-      <Footer shouldRenderFooter={shouldRenderFooter}/>
+      {shouldRenderFooter && <Footer/>}
     </div>
   );
 }
