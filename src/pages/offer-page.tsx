@@ -1,9 +1,31 @@
+import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { AppRoute } from '../const';
+import { TOffer } from '../types/offers';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
 import Review from '../components/review/review';
+import Premium from '../components/ui/premium';
+import Favorite from '../components/ui/favorite';
+import { getStrStartWithCapitalLetters } from '../utils';
+import { TReview } from '../types/reviews';
 
-function OfferPage () {
+type OfferPageScreenProps = {
+  offers: TOffer[];
+  reviews: TReview[];
+}
+
+function OfferPage ({offers, reviews} : OfferPageScreenProps) {
+  const {id: currentId} = useParams();
+
+  const currentOffer = offers.find((offer) => offer.id === currentId);
+
+  if (!currentOffer) {
+    return <Navigate to={AppRoute.Main}/>;
+  }
+
+  const {title, type, price, isFavorite, isPremium} = currentOffer;
+
   return (
     <main className="page__main page__main--offer">
       <Helmet>
@@ -13,19 +35,12 @@ function OfferPage () {
         <Gallery />
         <div className="offer__container container">
           <div className="offer__wrapper">
-            <div className="offer__mark">
-              <span>Premium</span>
-            </div>
+            {isPremium && <Premium isOfferCard={false}/>}
             <div className="offer__name-wrapper">
               <h1 className="offer__name">
-                Beautiful &amp; luxurious studio at great location
+                {title}
               </h1>
-              <button className="offer__bookmark-button button" type="button">
-                <svg className="offer__bookmark-icon" width={31} height={33}>
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <Favorite isOfferCard={false} isFavorite={isFavorite}/>
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
@@ -36,7 +51,7 @@ function OfferPage () {
             </div>
             <ul className="offer__features">
               <li className="offer__feature offer__feature--entire">
-                Apartment
+                {getStrStartWithCapitalLetters(type)}
               </li>
               <li className="offer__feature offer__feature--bedrooms">
                 3 Bedrooms
@@ -46,7 +61,7 @@ function OfferPage () {
               </li>
             </ul>
             <div className="offer__price">
-              <b className="offer__price-value">&euro;120</b>
+              <b className="offer__price-value">&euro;{price}</b>
               <span className="offer__price-text">&nbsp;night</span>
             </div>
             <OfferInside/>
@@ -72,7 +87,7 @@ function OfferPage () {
                 </p>
               </div>
             </div>
-            <Review />
+            <Review reviews={reviews}/>
           </div>
         </div>
         <section className="offer__map map"></section>

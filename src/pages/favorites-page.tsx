@@ -1,6 +1,32 @@
+import { Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { TOffer } from '../types/offers';
+import { AppRoute } from '../const';
 
-function FavoritesPage () {
+type FavoritesPageProps = {
+  favorites: TOffer[];
+}
+
+function FavoritesPage ({favorites} : FavoritesPageProps) : JSX.Element {
+
+  if (favorites.length === 0){
+    <Navigate to={AppRoute.Main}></Navigate>;
+  }
+  /*
+  type TFavoritesSortList = {
+    [key: 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf']?: TOffer[];
+  }
+
+  const favoritesSortList : TFavoritesSortList = {};
+  favorites.forEach((favorite) => {
+    console.log(favoritesSortList[favorite.city.name])
+    if (!favoritesSortList[favorite.city.name]) {
+      favoritesSortList[favorite.city.name] = [favorite];
+    }
+    favoritesSortList[favorite.city.name].push(favorite);
+
+  });*/
+
   return (
     <main className="page__main page__main--favorites">
       <Helmet>

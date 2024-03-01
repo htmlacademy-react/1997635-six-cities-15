@@ -10,12 +10,17 @@ import Layout from '../layout/layout';
 import ScrollToTop from '../scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import { getAuthorizationStatus } from '../../mock/getAuthorizationStatus';
+import { TOffer } from '../../types/offers';
+import { TReview } from '../../types/reviews';
 
 type AppScreenProps = {
   offersCount: number;
+  offers: TOffer[];
+  reviews: TReview[];
+  favorites: TOffer[];
 }
 
-function App({offersCount}: AppScreenProps): JSX.Element {
+function App({offersCount, offers, reviews, favorites}: AppScreenProps): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
   return (
     <HelmetProvider>
@@ -25,7 +30,7 @@ function App({offersCount}: AppScreenProps): JSX.Element {
           <Route path={AppRoute.Main} element={<Layout/>}>
             <Route
               index
-              element={<MainPage offersCount={offersCount}/>}
+              element={<MainPage offersCount={offersCount} offers={offers}/>}
             />
             <Route
               path={AppRoute.Login}
@@ -39,14 +44,14 @@ function App({offersCount}: AppScreenProps): JSX.Element {
               path={AppRoute.Favorites}
               element={
                 <PrivateRoute authorizationStatus={authorizationStatus}>
-                  <FavoritesPage/>
+                  <FavoritesPage favorites={favorites}/>
                 </PrivateRoute>
               }
             />
             <Route path={AppRoute.Offer}>
               <Route
                 path=':id'
-                element={<OfferPage/>}
+                element={<OfferPage offers={offers} reviews={reviews}/>}
               />
             </Route>
           </Route>

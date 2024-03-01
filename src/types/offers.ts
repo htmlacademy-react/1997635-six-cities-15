@@ -1,4 +1,4 @@
-export type Offer = {
+export type TOffer = {
   id: string;
   title: string;
   type: 'apartment' | 'room' | 'house' | 'hotel';

@@ -1,6 +1,6 @@
-import { Offer } from '../types/offers';
+import { TOffer } from '../types/offers';
 
-export const Offers: Offer[] = [
+export const Offers: TOffer[] = [
   {
     id: 'fce895d5-7d44-4f97-8674-89c052961e5b',
     title: 'Canal View Prinsengracht',
@@ -89,7 +89,7 @@ export const Offers: Offer[] = [
       longitude: 2.358499,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 4.9
   },
