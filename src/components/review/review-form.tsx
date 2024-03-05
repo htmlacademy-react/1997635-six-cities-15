@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, Fragment } from 'react';
-import { RatingValues } from '../../const';
+import { MIN_LENGTH_COMMENT, RatingValues } from '../../const';
 
 function ReviewForm () {
   const [formValues, setFormValues] = useState<{rating: null | number; comment: string}>({rating: null, comment: ''});
@@ -45,7 +45,7 @@ function ReviewForm () {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(formValues.rating && formValues.comment.length >= 50)}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!(formValues.rating && formValues.comment.length >= MIN_LENGTH_COMMENT)}>Submit</button>
       </div>
     </form>
   );

@@ -1,3 +1,5 @@
+export const MIN_LENGTH_COMMENT = 50;
+
 export const Setting = {
   OffersCount: 5
 };
