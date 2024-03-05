@@ -1,4 +1,4 @@
-import { TReview } from '../../types/reviews';
+import type { TReview } from '../../types/reviews';
 import Rating from '../ui/rating';
 
 type ReviewItemProps = {

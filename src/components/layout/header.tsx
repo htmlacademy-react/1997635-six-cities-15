@@ -1,4 +1,4 @@
-import { TOffer } from '../../types/offers';
+import type { TOffer } from '../../types/offers';
 import Logo from '../ui/logo';
 import Navigation from './navigation/navigation';
 

@@ -1,4 +1,4 @@
-import { TOffer } from '../types/offers';
+import type { TOffer } from '../types/offers';
 
 export const Offers: TOffer[] = [
   {

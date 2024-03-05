@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { TOffer } from '../../types/offers';
+import type { TOffer } from '../../types/offers';
 import { getStrStartWithCapitalLetters } from '../../utils';
 import { AppRoute } from '../../const';
 import Premium from '../ui/premium';

@@ -2,7 +2,7 @@ import Map from '../components/map/map';
 import Offers from '../components/offer/offers';
 import Sort from '../components/sort/sort';
 import Tabs from '../components/tabs/tabs';
-import { TOffer } from '../types/offers';
+import type { TOffer } from '../types/offers';
 
 type MainPageScreenProps = {
   offersCount: number;

@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { TOffer } from '../types/offers';
+import type { TOffer } from '../types/offers';
 import { AppRoute, Locations } from '../const';
 import FavoritesLocation from '../components/favorites-location/favorites-location';
 

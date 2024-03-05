@@ -10,8 +10,8 @@ import Layout from '../layout/layout';
 import ScrollToTop from '../scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import { getAuthorizationStatus } from '../../mock/getAuthorizationStatus';
-import { TOffer } from '../../types/offers';
-import { TReview } from '../../types/reviews';
+import type { TOffer } from '../../types/offers';
+import type { TReview } from '../../types/reviews';
 
 type AppScreenProps = {
   offersCount: number;

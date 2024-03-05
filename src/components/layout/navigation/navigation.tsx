@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { getAuthorizationStatus } from '../../../mock/getAuthorizationStatus';
-import { TOffer } from '../../../types/offers';
+import type { TOffer } from '../../../types/offers';
 
 type NavigationProps = {
   favorites: TOffer[];

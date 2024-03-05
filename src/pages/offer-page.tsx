@@ -1,8 +1,8 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../const';
-import { TOffer } from '../types/offers';
-import { TReview } from '../types/reviews';
+import type { TOffer } from '../types/offers';
+import type { TReview } from '../types/reviews';
 import { getStrStartWithCapitalLetters } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';

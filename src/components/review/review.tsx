@@ -2,7 +2,7 @@ import ReviewForm from './review-form';
 import ReviewList from './review-list';
 import { getAuthorizationStatus } from '../../mock/getAuthorizationStatus';
 import { AuthorizationStatus } from '../../const';
-import { TReview } from '../../types/reviews';
+import type { TReview } from '../../types/reviews';
 
 type ReviewProps = {
   reviews: TReview[];

@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Header from './header';
 import Footer from './footer';
-import { TOffer } from '../../types/offers';
+import type { TOffer } from '../../types/offers';
 
 const getLayoutState = (pathname: AppRoute) => {
   let rootClassName = '';
