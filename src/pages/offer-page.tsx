@@ -10,7 +10,7 @@ import Review from '../components/review/review';
 import Premium from '../components/ui/premium';
 import Favorite from '../components/ui/favorite';
 import Rating from '../components/ui/rating';
-import OfferItem from '../components/offer/offer';
+import OfferItem from '../components/offer/offer-item';
 
 type OfferPageScreenProps = {
   offers: TOffer[];

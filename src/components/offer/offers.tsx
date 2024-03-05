@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Nullable } from 'vitest';
-import OfferItem from './offer';
+import OfferItem from './offer-item';
 import { TOffer } from '../../types/offers';
 
 type OffersScreenProps = {
@@ -10,7 +10,7 @@ type OffersScreenProps = {
 
 function Offers ({offersCount, offers}: OffersScreenProps): JSX.Element {
 
-  const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
+  const [_, setActiveOffer] = useState<Nullable<TOffer>>(null);
 
   const handleOfferHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);
