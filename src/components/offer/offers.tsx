@@ -1,4 +1,5 @@
-//import { useState } from 'react';
+import { useState } from 'react';
+import { Nullable } from 'vitest';
 import OfferItem from './offer';
 import { TOffer } from '../../types/offers';
 
@@ -9,17 +10,12 @@ type OffersScreenProps = {
 
 function Offers ({offersCount, offers}: OffersScreenProps): JSX.Element {
 
-  /*const [activeOffer, setActiveOffer] = useState(null<Nullable<TOffer>>);
+  const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
 
-  const handleOfferClick = (evt: FormEvent<HTMLFormElement>, offer: TOffer) => {
-    evt.preventDefault();
-    Перейти на страницу предложения
+  const handleOfferHover = (offer?: TOffer) => {
+    setActiveOffer(offer || null);
   };
-  const handleOfferHover = (evt: FormEvent<HTMLFormElement>, offer: TOffer) => {
-    evt.preventDefault();
-    setActiveOffer(offer);
-  };
-  */
+
 
   const getOffersList = () => {
     if (offersCount >= offers.length) {
@@ -30,7 +26,7 @@ function Offers ({offersCount, offers}: OffersScreenProps): JSX.Element {
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {getOffersList().map((offer) => <OfferItem key={offer.id} offer={offer}/>)}
+      {getOffersList().map((offer) => <OfferItem key={offer.id} offer={offer} isOfferItem handleOfferHover={handleOfferHover}/>)}
     </div>
   );
 }

@@ -1,11 +1,12 @@
 import { TReview } from '../../types/reviews';
+import Rating from '../ui/rating';
 
 type ReviewItemProps = {
   review: TReview;
 }
 
 function ReviewItem ({review}: ReviewItemProps): JSX.Element {
-  const {user, date, comment} = review;
+  const {user, date, comment, rating} = review;
   const formatDate = new Date(date).toLocaleString('en-US', { month: 'long', year: 'numeric'});
   return (
     <li className="reviews__item">
@@ -16,12 +17,7 @@ function ReviewItem ({review}: ReviewItemProps): JSX.Element {
         <span className="reviews__user-name">{user.name}</span>
       </div>
       <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{width: '80%'}}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating rating={rating}/>
         <p className="reviews__text">
           {comment}
         </p>

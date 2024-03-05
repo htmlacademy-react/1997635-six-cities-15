@@ -4,7 +4,7 @@ export const Reviews = [
     date: '2019-05-08T14:13:56.569Z',
     user: {
       name: 'Oliver Conner',
-      avatarUrl: 'https://url-to-image/image.png',
+      avatarUrl: 'img/avatar-max.jpg',
       isPro: false
     },
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
@@ -15,7 +15,7 @@ export const Reviews = [
     date: '2017-09-08T14:14:56.569Z',
     user: {
       name: 'Petr Ivanov',
-      avatarUrl: 'https://url-to-image/image.png',
+      avatarUrl: 'img/avatar-max.jpg',
       isPro: true
     },
     comment: 'This is wonderful.',
@@ -26,7 +26,7 @@ export const Reviews = [
     date: '2018-08-08T14:13:56.569Z',
     user: {
       name: 'Jane Austin',
-      avatarUrl: 'https://url-to-image/image.png',
+      avatarUrl: 'img/avatar-max.jpg',
       isPro: false
     },
     comment: 'Wonderful views.',

@@ -27,7 +27,7 @@ function App({offersCount, offers, reviews, favorites}: AppScreenProps): JSX.Ele
       <BrowserRouter>
         <ScrollToTop/>
         <Routes>
-          <Route path={AppRoute.Main} element={<Layout/>}>
+          <Route path={AppRoute.Main} element={<Layout favorites={favorites}/>}>
             <Route
               index
               element={<MainPage offersCount={offersCount} offers={offers}/>}

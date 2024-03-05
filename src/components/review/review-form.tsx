@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, Fragment } from 'react';
 import { RatingValues } from '../../const';
 
 function ReviewForm () {
@@ -8,7 +8,7 @@ function ReviewForm () {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RatingValues.map((value) => (
-          <>
+          <Fragment key={value}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
@@ -27,7 +27,7 @@ function ReviewForm () {
                 <use xlinkHref="#icon-star"></use>
               </svg>
             </label>
-          </>))}
+          </Fragment>))}
       </div>
       <textarea
         className="reviews__textarea form__textarea"

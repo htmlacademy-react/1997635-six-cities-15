@@ -22,7 +22,19 @@ export const Favorites: TOffer[] = [
     },
     isFavorite: true,
     isPremium: false,
-    rating: 2.1
+    rating: 2.1,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'https://url-to-image/image.png',
+      isPro: true
+    },
+    images: [
+      'https://url-to-image/image.png'
+    ],
+    maxAdults: 7
   },
   {
     id: '711b6c78-6561-452c-afba-58393679569d',
@@ -45,7 +57,19 @@ export const Favorites: TOffer[] = [
     },
     isFavorite: true,
     isPremium: false,
-    rating: 4.8
+    rating: 4.8,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'https://url-to-image/image.png',
+      isPro: true
+    },
+    images: [
+      'https://url-to-image/image.png'
+    ],
+    maxAdults: 7
   },
   {
     id: '9b7d3877-aca6-47a2-bd9d-d235a34d3710',
@@ -68,7 +92,19 @@ export const Favorites: TOffer[] = [
     },
     isFavorite: true,
     isPremium: true,
-    rating: 1.6
+    rating: 1.6,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'https://url-to-image/image.png',
+      isPro: true
+    },
+    images: [
+      'https://url-to-image/image.png'
+    ],
+    maxAdults: 7
   },
   {
     id: '626beca0-de81-4b6a-bf8a-e89efa99d098',
@@ -91,7 +127,19 @@ export const Favorites: TOffer[] = [
     },
     isFavorite: true,
     isPremium: true,
-    rating: 1.3
+    rating: 1.3,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'https://url-to-image/image.png',
+      isPro: true
+    },
+    images: [
+      'https://url-to-image/image.png'
+    ],
+    maxAdults: 7
   }
 ];
 

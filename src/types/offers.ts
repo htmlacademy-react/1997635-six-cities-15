@@ -1,10 +1,12 @@
+import { HousingTypes, Locations } from '../const';
+
 export type TOffer = {
   id: string;
   title: string;
-  type: 'apartment' | 'room' | 'house' | 'hotel';
+  type: keyof typeof HousingTypes;
   price: number;
   city: {
-    name: 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
+    name: keyof typeof Locations;
     location: {
       latitude: number;
       longitude: number;
@@ -20,4 +22,14 @@ export type TOffer = {
   isPremium: boolean;
   rating: number;
   previewImage: string;
+  description: string;
+  bedrooms: number;
+  goods: [string];
+  host: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  images: [string];
+  maxAdults: number;
 };

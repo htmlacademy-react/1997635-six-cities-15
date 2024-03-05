@@ -22,7 +22,19 @@ export const Offers: TOffer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 2.1
+    rating: 2.1,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: false
+    },
+    images: [
+      'img/apartment-01.jpg'
+    ],
+    maxAdults: 4
   },
   {
     id: 'bb24c641-a20b-4bfd-8731-2db7fa55f5a7',
@@ -45,7 +57,19 @@ export const Offers: TOffer[] = [
     },
     isFavorite: false,
     isPremium: true,
-    rating: 3.9
+    rating: 3.9,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: false
+    },
+    images: [
+      'img/studio-01.jpg'
+    ],
+    maxAdults: 4
   },
   {
     id: 'a65fed04-5db4-4fbb-936b-c699e56269c8',
@@ -68,7 +92,19 @@ export const Offers: TOffer[] = [
     },
     isFavorite: false,
     isPremium: true,
-    rating: 2.7
+    rating: 2.7,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: false
+    },
+    images: [
+      'img/studio-01.jpg'
+    ],
+    maxAdults: 3
   },
   {
     id: '7236b959-68e2-4c07-961d-65c0c0b5bca0',
@@ -91,7 +127,19 @@ export const Offers: TOffer[] = [
     },
     isFavorite: true,
     isPremium: true,
-    rating: 4.9
+    rating: 4.9,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true
+    },
+    images: [
+      'img/room.jpg'
+    ],
+    maxAdults: 2
   },
   {
     id: '78db97ed-e132-4b9d-a2e6-5602159b2266',
@@ -114,6 +162,18 @@ export const Offers: TOffer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 3.9
+    rating: 3.9,
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    bedrooms: 3,
+    goods: ['Heating'],
+    host: {
+      name: 'Oliver Conner',
+      avatarUrl: 'img/avatar-angelina.jpg',
+      isPro: true
+    },
+    images: [
+      'img/room.jpg'
+    ],
+    maxAdults: 7
   }
 ];
