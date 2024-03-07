@@ -2,12 +2,14 @@ import Map from '../components/map/map';
 import Offers from '../components/offer/offers';
 import Sort from '../components/sort/sort';
 import Tabs from '../components/tabs/tabs';
+import type { TOffer } from '../types/offers';
 
 type MainPageScreenProps = {
   offersCount: number;
+  offers: TOffer[];
 }
 
-function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
+function MainPage({offersCount, offers}: MainPageScreenProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -27,7 +29,10 @@ function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
               </span>
               <Sort />
             </form>
-            <Offers offersCount={offersCount}/>
+            <Offers
+              offersCount={offersCount}
+              offers={offers}
+            />
           </section>
           <Map />
         </div>

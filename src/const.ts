@@ -1,3 +1,5 @@
+export const MIN_LENGTH_COMMENT = 50;
+
 export const Setting = {
   OffersCount: 5
 };
@@ -9,14 +11,21 @@ export const PlacesOption = {
   TOP_RATED: 'Top rated first'
 } as const;
 
-export const Locations = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf'
-] as const;
+export enum Locations {
+  Paris ='Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
+
+export const enum HousingTypes {
+  apartment = 'apartment',
+  room = 'room',
+  house = 'house',
+  hotel = 'hotel'
+}
 
 export const OfferInsideItems = [
   'Wi-Fi',
@@ -31,33 +40,6 @@ export const OfferInsideItems = [
   'Fridge'
 ] as const;
 
-export const GalleryImages = [
-  {
-    src: 'img/room.jpg',
-    alt: 'Photo studio'
-  },
-  {
-    src: 'img/apartment-01.jpg',
-    alt: 'Photo studio'
-  },
-  {
-    src: 'img/apartment-02.jpg',
-    alt: 'Photo studio'
-  },
-  {
-    src: 'img/apartment-03.jpg',
-    alt: 'Photo studio'
-  },
-  {
-    src: 'img/studio-01.jpg',
-    alt: 'Photo studio'
-  },
-  {
-    src: 'img/apartment-01.jpg',
-    alt: 'Photo studio'
-  },
-] as const;
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -70,3 +52,5 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const RatingValues = [5, 4, 3, 2, 1] as const;

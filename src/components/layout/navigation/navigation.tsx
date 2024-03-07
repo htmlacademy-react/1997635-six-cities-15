@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { getAuthorizationStatus } from '../../../mock/getAuthorizationStatus';
+import type { TOffer } from '../../../types/offers';
 
-function Navigation () {
+type NavigationProps = {
+  favorites: TOffer[];
+}
+
+function Navigation ({favorites} : NavigationProps) : JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
+
+  const favoritesCount = favorites.length;
 
   return (
     <nav className="header__nav">
@@ -15,7 +22,7 @@ function Navigation () {
             {authorizationStatus === AuthorizationStatus.Auth ? (
               <>
                 <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                <span className="header__favorite-count">3</span>
+                <span className="header__favorite-count">{favoritesCount}</span>
               </>
             ) : <span className="header__login">Sign in</span>}
 

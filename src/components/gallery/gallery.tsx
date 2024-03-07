@@ -1,11 +1,14 @@
-import { GalleryImages } from '../../const';
 import GalleryItem from './gallery-item';
 
-function Gallery () {
+type GalleryProps = {
+  images: [string];
+}
+
+function Gallery ({images}: GalleryProps) : JSX.Element {
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
-        {GalleryImages.map((image) => <GalleryItem key={image.src} src={image.src} alt={image.alt}/>)}
+        {images.map((image) => <GalleryItem key={image} src={image}/>)}
       </div>
     </div>
   );

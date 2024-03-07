@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Header from './header';
 import Footer from './footer';
+import type { TOffer } from '../../types/offers';
 
 const getLayoutState = (pathname: AppRoute) => {
   let rootClassName = '';
@@ -22,7 +23,11 @@ const getLayoutState = (pathname: AppRoute) => {
   return {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter};
 };
 
-function Layout () {
+type LayoutProps = {
+  favorites: TOffer[];
+}
+
+function Layout ({favorites} : LayoutProps) : JSX.Element {
   const {pathname} = useLocation();
   const {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter} = getLayoutState(pathname as AppRoute);
 
@@ -31,6 +36,7 @@ function Layout () {
       <Header
         linkClassName={linkClassName}
         shouldRenderUser={shouldRenderUser}
+        favorites={favorites}
       />
       <Outlet />
       {shouldRenderFooter && <Footer/>}
