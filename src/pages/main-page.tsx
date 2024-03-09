@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Nullable } from 'vitest';
 import Map from '../components/map/map';
 import Offers from '../components/offer/offers';
 import Sort from '../components/sort/sort';
@@ -10,6 +12,12 @@ type MainPageScreenProps = {
 }
 
 function MainPage({offersCount, offers}: MainPageScreenProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
+
+  const handleOfferHover = (offer?: TOffer) => {
+    setActiveOffer(offer || null);
+  };
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -32,9 +40,13 @@ function MainPage({offersCount, offers}: MainPageScreenProps): JSX.Element {
             <Offers
               offersCount={offersCount}
               offers={offers}
+              handleOfferHover={handleOfferHover}
             />
           </section>
-          <Map />
+          <Map
+            offers={offers}
+            activeOffer={activeOffer}
+          />
         </div>
       </div>
     </main>
