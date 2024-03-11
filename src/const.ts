@@ -1,7 +1,7 @@
 export const MIN_LENGTH_COMMENT = 50;
 
 export const Setting = {
-  OffersCount: 5
+  OffersCount: 4
 };
 
 export const PlacesOption = {
@@ -56,7 +56,22 @@ export enum AuthorizationStatus {
 export const RatingValues = [5, 4, 3, 2, 1] as const;
 
 export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+  '/img/pin.svg';
 
 export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+  '/img/pin-active.svg';
+
+export const DEFAULT_CITY = {
+  name: 'Paris',
+    location: {
+      latitude: 48.85661,
+      longitude: 2.351499,
+      zoom: 13
+    },
+} as const;
+
+export const TileLayerPattern = {
+  URL: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+  ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+} as const;
+

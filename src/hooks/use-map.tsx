@@ -1,33 +1,30 @@
 import {useEffect, useState, MutableRefObject, useRef} from 'react';
 import {Map, TileLayer} from 'leaflet';
-import type { TOffer } from '../types/offers';
-import { Nullable } from 'vitest';
+import type { TCityOffer } from '../types/offers';
+import { TileLayerPattern } from '../const';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  offer: Nullable<TOffer>
+  city: TCityOffer
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
-      if (!offer) {
-        return;
-      }
       const instance = new Map(mapRef.current, {
         center: {
-          lat: offer.location.latitude,
-          lng: offer.location.longitude
+          lat: city.location.latitude,
+          lng: city.location.longitude
         },
-        zoom: offer.location.zoom
+        zoom: city.location.zoom
       });
 
       const layer = new TileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+        TileLayerPattern.URL,
         {
           attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            TileLayerPattern.ATTRIBUTION
         }
       );
 
@@ -36,7 +33,7 @@ function useMap(
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, offer]);
+  }, [mapRef, city]);
 
   return map;
 }

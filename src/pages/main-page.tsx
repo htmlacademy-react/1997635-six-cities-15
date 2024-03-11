@@ -5,6 +5,7 @@ import Offers from '../components/offer/offers';
 import Sort from '../components/sort/sort';
 import Tabs from '../components/tabs/tabs';
 import type { TOffer } from '../types/offers';
+import { DEFAULT_CITY } from '../const';
 
 type MainPageScreenProps = {
   offersCount: number;
@@ -44,6 +45,7 @@ function MainPage({offersCount, offers}: MainPageScreenProps): JSX.Element {
             />
           </section>
           <Map
+            city={DEFAULT_CITY}
             offers={offers}
             activeOffer={activeOffer}
           />

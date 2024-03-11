@@ -1,4 +1,4 @@
-import type { TOffer } from '../../types/offers';
+import type { TCityOffer, TOffer } from '../../types/offers';
 import { Nullable } from 'vitest';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -9,24 +9,24 @@ import useMap from '../../hooks/use-map';
 type MapProps = {
   offers: TOffer[];
   activeOffer: Nullable<TOffer>;
+  city: TCityOffer
 }
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [27, 39],
+  iconAnchor: [27, 39]
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [27, 39],
+  iconAnchor: [27, 39]
 });
 
-function Map ({offers, activeOffer}: MapProps) : JSX.Element {
+function Map ({offers, activeOffer, city}: MapProps) : JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, activeOffer);
-
+  const map = useMap(mapRef, city);
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
@@ -38,7 +38,7 @@ function Map ({offers, activeOffer}: MapProps) : JSX.Element {
 
         marker
           .setIcon(
-            activeOffer !== null && offer.id === activeOffer?.id
+            offer.id === activeOffer?.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
