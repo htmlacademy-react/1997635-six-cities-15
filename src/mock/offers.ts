@@ -141,7 +141,7 @@ export const Offers: TOffer[] = [
     ],
     maxAdults: 2
   },
-  {
+  /*{
     id: '78db97ed-e132-4b9d-a2e6-5602159b2266',
     title: 'Amazing and Extremely Central Flat',
     type: 'room',
@@ -175,5 +175,5 @@ export const Offers: TOffer[] = [
       'img/room.jpg'
     ],
     maxAdults: 7
-  }
+  }*/
 ];

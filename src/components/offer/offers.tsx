@@ -1,21 +1,13 @@
-import { useState } from 'react';
-import { Nullable } from 'vitest';
 import OfferItem from './offer-item';
 import type { TOffer } from '../../types/offers';
 
 type OffersScreenProps = {
   offersCount: number;
   offers: TOffer[];
+  handleOfferHover?: (offer?: TOffer) => void;
 }
 
-function Offers ({offersCount, offers}: OffersScreenProps): JSX.Element {
-
-  const [, setActiveOffer] = useState<Nullable<TOffer>>(null);
-
-  const handleOfferHover = (offer?: TOffer) => {
-    setActiveOffer(offer || null);
-  };
-
+function Offers ({offersCount, offers, handleOfferHover}: OffersScreenProps): JSX.Element {
 
   const getOffersList = () => {
     if (offersCount >= offers.length) {

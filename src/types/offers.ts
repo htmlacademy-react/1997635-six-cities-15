@@ -1,18 +1,20 @@
 import { HousingTypes, Locations } from '../const';
 
+export type TCityOffer = {
+  name: keyof typeof Locations;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+    };
+};
+
 export type TOffer = {
   id: string;
   title: string;
   type: keyof typeof HousingTypes;
   price: number;
-  city: {
-    name: keyof typeof Locations;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-      };
-    };
+  city: TCityOffer;
   location: {
     latitude: number;
     longitude: number;
