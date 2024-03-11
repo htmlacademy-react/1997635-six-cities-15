@@ -63,11 +63,11 @@ export const URL_MARKER_CURRENT =
 
 export const DEFAULT_CITY = {
   name: 'Paris',
-    location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
-      zoom: 13
-    },
+  location: {
+    latitude: 48.85661,
+    longitude: 2.351499,
+    zoom: 13
+  },
 } as const;
 
 export const TileLayerPattern = {

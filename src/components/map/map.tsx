@@ -9,7 +9,7 @@ import useMap from '../../hooks/use-map';
 type MapProps = {
   offers: TOffer[];
   activeOffer: Nullable<TOffer>;
-  city: TCityOffer
+  city: TCityOffer;
 }
 
 const defaultCustomIcon = new Icon({
