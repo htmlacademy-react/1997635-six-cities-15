@@ -31,7 +31,7 @@ function OfferPage ({offers, reviews} : OfferPageScreenProps) {
 
   const nearOffers = getNearOffers(offers, currentOffer);
 
-  const nearOffersPlusCurrent = [... nearOffers, currentOffer];
+  const nearOffersPlusCurrent = [...nearOffers, currentOffer];
 
   return (
     <main className="page__main page__main--offer">
