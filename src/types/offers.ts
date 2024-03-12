@@ -9,17 +9,19 @@ export type TCityOffer = {
     };
 };
 
+export type TLocationOffer = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
 export type TOffer = {
   id: string;
   title: string;
   type: keyof typeof HousingTypes;
   price: number;
   city: TCityOffer;
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-    };
+  location: TLocationOffer;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;

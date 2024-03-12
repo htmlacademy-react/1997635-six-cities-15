@@ -44,11 +44,13 @@ function MainPage({offersCount, offers}: MainPageScreenProps): JSX.Element {
               handleOfferHover={handleOfferHover}
             />
           </section>
-          <Map
-            city={DEFAULT_CITY}
-            offers={offers}
-            activeOffer={activeOffer}
-          />
+          <div className="cities__right-section">
+            <Map
+              city={DEFAULT_CITY}
+              offers={offers}
+              activeOffer={activeOffer}
+            />
+          </div>
         </div>
       </div>
     </main>

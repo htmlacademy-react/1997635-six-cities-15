@@ -10,6 +10,7 @@ type MapProps = {
   offers: TOffer[];
   activeOffer: Nullable<TOffer>;
   city: TCityOffer;
+  isOfferPage?: boolean;
 }
 
 const defaultCustomIcon = new Icon({
@@ -24,7 +25,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [27, 39]
 });
 
-function Map ({offers, activeOffer, city}: MapProps) : JSX.Element {
+function Map ({offers, activeOffer, city, isOfferPage}: MapProps) : JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   useEffect(() => {
@@ -52,13 +53,11 @@ function Map ({offers, activeOffer, city}: MapProps) : JSX.Element {
   }, [map, offers, activeOffer]);
 
   return (
-    <div className="cities__right-section">
-      <section
-        className="cities__map map"
-        ref={mapRef}
-      >
-      </section>
-    </div>
+    <section
+      className={`${isOfferPage ? 'offer' : 'cities'}__map map`}
+      ref={mapRef}
+    >
+    </section>
   );
 }
 

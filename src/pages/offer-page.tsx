@@ -1,9 +1,9 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { AppRoute } from '../const';
+import { AppRoute, DEFAULT_CITY } from '../const';
 import type { TOffer } from '../types/offers';
 import type { TReview } from '../types/reviews';
-import { getStrStartWithCapitalLetters } from '../utils';
+import { getStrStartWithCapitalLetters, getNearOffers } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
 import Review from '../components/review/review';
@@ -11,6 +11,7 @@ import Premium from '../components/ui/premium';
 import Favorite from '../components/ui/favorite';
 import Rating from '../components/ui/rating';
 import OfferItem from '../components/offer/offer-item';
+import Map from '../components/map/map';
 
 type OfferPageScreenProps = {
   offers: TOffer[];
@@ -27,6 +28,10 @@ function OfferPage ({offers, reviews} : OfferPageScreenProps) {
   }
 
   const {title, type, price, isFavorite, isPremium, rating, images, bedrooms, maxAdults, host, description} = currentOffer;
+
+  const nearOffers = getNearOffers(offers, currentOffer);
+
+  const nearOffersPlusCurrent = [... nearOffers, currentOffer];
 
   return (
     <main className="page__main page__main--offer">
@@ -84,13 +89,18 @@ function OfferPage ({offers, reviews} : OfferPageScreenProps) {
             <Review reviews={reviews}/>
           </div>
         </div>
-        <section className="offer__map map"></section>
+        <Map
+          offers={nearOffersPlusCurrent}
+          activeOffer={currentOffer}
+          city={DEFAULT_CITY}
+          isOfferPage
+        />
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            {offers.slice(0, 3).map((offer) => <OfferItem key={offer.id} offer={offer}/>)}
+            {nearOffers.map((offer) => <OfferItem key={offer.id} offer={offer}/>)}
           </div>
         </section>
       </div>
