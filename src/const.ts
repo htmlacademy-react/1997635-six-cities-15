@@ -45,6 +45,7 @@ export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer',
+  Empty = '/empty'
 }
 
 export enum AuthorizationStatus {
@@ -74,4 +75,6 @@ export const TileLayerPattern = {
   URL: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
   ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
 } as const;
+
+export const NEAR_OFFERS_COUNT = 3;
 

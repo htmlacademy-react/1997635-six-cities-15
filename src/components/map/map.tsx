@@ -1,6 +1,6 @@
 import type { TCityOffer, TOffer } from '../../types/offers';
 import { Nullable } from 'vitest';
-import { Icon, Marker, layerGroup } from 'leaflet';
+import { Icon, Marker, layerGroup, Circle } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import { useRef, useEffect } from 'react';
@@ -10,6 +10,7 @@ type MapProps = {
   offers: TOffer[];
   activeOffer: Nullable<TOffer>;
   city: TCityOffer;
+  isOfferPage?: boolean;
 }
 
 const defaultCustomIcon = new Icon({
@@ -24,7 +25,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [27, 39]
 });
 
-function Map ({offers, activeOffer, city}: MapProps) : JSX.Element {
+function Map ({offers, activeOffer, city, isOfferPage}: MapProps) : JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   useEffect(() => {
@@ -45,20 +46,27 @@ function Map ({offers, activeOffer, city}: MapProps) : JSX.Element {
           .addTo(markerLayer);
       });
 
+      if (isOfferPage && activeOffer) {
+        new Circle([activeOffer.location.latitude, activeOffer.location.longitude], {
+          color: '#A5C2E0',
+          fillColor: '#A5C2E0',
+          fillOpacity: 0.5,
+          radius: 2000
+        }).addTo(markerLayer);
+      }
+
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeOffer]);
+  }, [map, offers, activeOffer, isOfferPage]);
 
   return (
-    <div className="cities__right-section">
-      <section
-        className="cities__map map"
-        ref={mapRef}
-      >
-      </section>
-    </div>
+    <section
+      className={`${isOfferPage ? 'offer' : 'cities'}__map map`}
+      ref={mapRef}
+    >
+    </section>
   );
 }
 
