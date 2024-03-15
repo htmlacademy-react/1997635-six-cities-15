@@ -1,7 +1,7 @@
 import type { TOffer } from '../types/offers';
 
 export const Favorites: TOffer[] = [
-  /*{
+  {
     id: 'fce895d5-7d44-4f97-8674-89c052961e5b',
     title: 'Canal View Prinsengracht',
     type: 'room',
@@ -140,6 +140,6 @@ export const Favorites: TOffer[] = [
       'https://url-to-image/image.png'
     ],
     maxAdults: 7
-  }*/
+  }
 ];
 

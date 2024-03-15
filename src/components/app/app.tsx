@@ -15,12 +15,11 @@ import type { TReview } from '../../types/reviews';
 
 type AppScreenProps = {
   offersCount: number;
-  offers: TOffer[];
   reviews: TReview[];
   favorites: TOffer[];
 }
 
-function App({offersCount, offers, reviews, favorites}: AppScreenProps): JSX.Element {
+function App({offersCount, reviews, favorites}: AppScreenProps): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
   return (
     <HelmetProvider>
@@ -30,7 +29,7 @@ function App({offersCount, offers, reviews, favorites}: AppScreenProps): JSX.Ele
           <Route path={AppRoute.Main} element={<Layout favorites={favorites}/>}>
             <Route
               index
-              element={<MainPage offersCount={offersCount} offers={offers}/>}
+              element={<MainPage offersCount={offersCount}/>}
             />
             <Route
               path={AppRoute.Login}
@@ -51,7 +50,7 @@ function App({offersCount, offers, reviews, favorites}: AppScreenProps): JSX.Ele
             <Route path={AppRoute.Offer}>
               <Route
                 path=':id'
-                element={<OfferPage offers={offers} reviews={reviews}/>}
+                element={<OfferPage reviews={reviews}/>}
               />
             </Route>
           </Route>

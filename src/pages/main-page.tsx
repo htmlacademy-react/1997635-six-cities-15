@@ -5,22 +5,26 @@ import Offers from '../components/offer/offers';
 import Sort from '../components/sort/sort';
 import Tabs from '../components/tabs/tabs';
 import type { TOffer } from '../types/offers';
-import { DEFAULT_CITY } from '../const';
 import OfferEmpty from '../components/offer/offer-empty';
+import { useAppSelector } from '../hooks';
+import { selectCity, selectOffers } from '../store/selectors/offers';
 
 type MainPageScreenProps = {
   offersCount: number;
-  offers: TOffer[];
 }
 
-function MainPage({offersCount, offers}: MainPageScreenProps): JSX.Element {
+function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
+  const offers = useAppSelector(selectOffers);
+  const currentCity = useAppSelector(selectCity);
+
+  const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
 
   const handleOfferHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);
   };
 
-  const isEmptyOffers = offers.length === 0;
+  const isEmptyOffers = currentOffers.length === 0;
 
   return (
     <main className={`page__main page__main--index${isEmptyOffers ? ' page__main--index-empty' : ''}`}>
@@ -32,7 +36,7 @@ function MainPage({offersCount, offers}: MainPageScreenProps): JSX.Element {
             <>
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">312 places to stay in Amsterdam</b>
+                <b className="places__found">{currentOffers.length} place{currentOffers.length !== 1 ? 's ' : ''} to stay in {currentCity}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex={0}>
@@ -44,15 +48,14 @@ function MainPage({offersCount, offers}: MainPageScreenProps): JSX.Element {
                   <Sort />
                 </form>
                 <Offers
+                  offers={currentOffers}
                   offersCount={offersCount}
-                  offers={offers}
                   handleOfferHover={handleOfferHover}
                 />
               </section>
               <div className="cities__right-section">
                 <Map
-                  city={DEFAULT_CITY}
-                  offers={offers}
+                  offers={currentOffers}
                   activeOffer={activeOffer}
                 />
               </div>
