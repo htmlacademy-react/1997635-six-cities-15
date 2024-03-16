@@ -1,7 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { AppRoute, DEFAULT_CITY } from '../const';
-import type { TOffer } from '../types/offers';
+import { AppRoute } from '../const';
 import type { TReview } from '../types/reviews';
 import { getStrStartWithCapitalLetters, getNearOffers } from '../utils';
 import Gallery from '../components/gallery/gallery';
@@ -12,13 +11,16 @@ import Favorite from '../components/ui/favorite';
 import Rating from '../components/ui/rating';
 import OfferItem from '../components/offer/offer-item';
 import Map from '../components/map/map';
+import { useAppSelector } from '../hooks';
+import { selectOffers } from '../store/selectors/offers';
 
 type OfferPageScreenProps = {
-  offers: TOffer[];
   reviews: TReview[];
 }
 
-function OfferPage ({offers, reviews} : OfferPageScreenProps) {
+function OfferPage ({reviews} : OfferPageScreenProps) {
+  const offers = useAppSelector(selectOffers);
+
   const {id: currentId} = useParams();
 
   const currentOffer = offers.find((offer) => offer.id === currentId);
@@ -92,7 +94,6 @@ function OfferPage ({offers, reviews} : OfferPageScreenProps) {
         <Map
           offers={nearOffersPlusCurrent}
           activeOffer={currentOffer}
-          city={DEFAULT_CITY}
           isOfferPage
         />
       </section>

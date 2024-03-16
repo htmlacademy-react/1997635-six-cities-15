@@ -1,11 +1,16 @@
 import { PlacesOption } from '../../const';
 import SortItem from './sort-item';
 
-function Sort () {
+type SortProps = {
+  handleSortActive: (activeSortType: PlacesOption) => void;
+  currentSortType: PlacesOption;
+}
+
+function Sort ({handleSortActive, currentSortType} : SortProps): JSX.Element {
   return (
     <ul className="places__options places__options--custom places__options--opened">
-      {Object.values(PlacesOption)
-        .map((option) => <SortItem option={option} key={option}/>)}
+      {(Object.values(PlacesOption) as Array<PlacesOption>)
+        .map((option) => <SortItem option={option} key={option} handleSortActive={handleSortActive} currentSortType={currentSortType}/>)}
     </ul>
   );
 }

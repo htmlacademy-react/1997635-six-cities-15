@@ -1,18 +1,29 @@
 import { Locations } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeCity } from '../../store/action';
+import { selectCity } from '../../store/selectors/offers';
 
 type TabItemProps = {
-  activeTab: keyof typeof Locations;
   place: Locations;
-  handleTabActive: (place: keyof typeof Locations) => void;
 }
 
-function TabItem ({activeTab, place, handleTabActive} : TabItemProps) : JSX.Element {
+function TabItem ({ place } : TabItemProps) : JSX.Element {
+  const dispatch = useAppDispatch();
+  const currentCity = useAppSelector(selectCity);
+  const isActive = currentCity === place;
+
+  const handleTabClick = () => {
+    if(!isActive){
+      dispatch(changeCity(place));
+    }
+  };
+
   return (
     <li className="locations__item">
       <a
-        className={`locations__item-link tabs__item${activeTab === place ? ' tabs__item--active' : ''}`}
+        className={`locations__item-link tabs__item${isActive ? ' tabs__item--active' : ''}`}
         href="#"
-        onClick={() =>handleTabActive(place)}
+        onClick={handleTabClick}
       >
         <span>{place}</span>
       </a>

@@ -1,4 +1,4 @@
-import { NEAR_OFFERS_COUNT } from './const';
+import { NEAR_OFFERS_COUNT, PlacesOption } from './const';
 import { TOffer } from './types/offers';
 
 const getStrStartWithCapitalLetters = (data: string) => data.replace(data[0], data[0].toUpperCase());
@@ -15,4 +15,18 @@ const getNearOffers = (offers: TOffer[], currentOffer: TOffer): TOffer[] => {
   return [...nearOffers];
 };
 
-export { getStrStartWithCapitalLetters, getNearOffers };
+const getSortOffersList = (sort: PlacesOption, offers: TOffer[]) => {
+  switch(sort) {
+    case PlacesOption.Price_to_high:
+      return offers.slice().sort((offerA, offerB) => offerA.price - offerB.price);
+    case PlacesOption.Price_to_low:
+      return offers.slice().sort((offerA, offerB) => offerB.price - offerA.price);
+    case PlacesOption.Top_rated:
+      return offers.slice().sort((offerA, offerB) => offerB.rating - offerA.rating);
+    case PlacesOption.Popular:
+    default:
+      return offers;
+  }
+};
+
+export { getStrStartWithCapitalLetters, getNearOffers, getSortOffersList };

@@ -4,7 +4,7 @@ import Header from './header';
 import Footer from './footer';
 import type { TOffer } from '../../types/offers';
 
-const getLayoutState = (pathname: AppRoute) => {
+const getLayoutState = (pathname: AppRoute, favorites: TOffer[]) => {
   let rootClassName = '';
   let linkClassName = '';
   let shouldRenderUser = true;
@@ -18,6 +18,9 @@ const getLayoutState = (pathname: AppRoute) => {
     shouldRenderUser = false;
   } else if (pathname === AppRoute.Favorites){
     shouldRenderFooter = true;
+    if(favorites.length === 0) {
+      rootClassName = ' page--favorites-empty';
+    }
   }
 
   return {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter};
@@ -29,7 +32,7 @@ type LayoutProps = {
 
 function Layout ({favorites} : LayoutProps) : JSX.Element {
   const {pathname} = useLocation();
-  const {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter} = getLayoutState(pathname as AppRoute);
+  const {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter} = getLayoutState(pathname as AppRoute, favorites);
 
   return (
     <div className={`page${rootClassName}`}>
