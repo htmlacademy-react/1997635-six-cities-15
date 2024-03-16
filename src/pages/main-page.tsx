@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Nullable } from 'vitest';
 import Map from '../components/map/map';
 import Offers from '../components/offer/offers';
@@ -8,6 +8,8 @@ import type { TOffer } from '../types/offers';
 import OfferEmpty from '../components/offer/offer-empty';
 import { useAppSelector } from '../hooks';
 import { selectCity, selectOffers } from '../store/selectors/offers';
+import { PlacesOption } from '../const';
+import { getSortOffersList } from '../utils';
 
 type MainPageScreenProps = {
   offersCount: number;
@@ -15,13 +17,29 @@ type MainPageScreenProps = {
 
 function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
+  const [sortType, setSortType] = useState<PlacesOption>(PlacesOption.Popular);
+  const [showSort, setShowSort] = useState<boolean>(false);
+
   const offers = useAppSelector(selectOffers);
   const currentCity = useAppSelector(selectCity);
 
   const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
 
+  const [sortOffers, setSortOffers] = useState<TOffer[]>(currentOffers);
+
+  useEffect(() => {
+    setSortOffers(getSortOffersList(sortType, currentOffers));
+  }, [sortType]);
+
   const handleOfferHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);
+  };
+
+  const handleSortActive = (activeSortType: PlacesOption) => {
+    if(activeSortType !== sortType) {
+      setSortType(activeSortType);
+    }
+    setShowSort(!showSort);
   };
 
   const isEmptyOffers = currentOffers.length === 0;
@@ -38,17 +56,21 @@ function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{currentOffers.length} place{currentOffers.length !== 1 ? 's ' : ''} to stay in {currentCity}</b>
                 <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex={0}>
-                    Popular
+                  <span className="places__sorting-caption">Sort by </span>
+                  <span
+                    className="places__sorting-type"
+                    tabIndex={0}
+                    onClick={() => setShowSort(!showSort)}
+                  >
+                    {sortType}
                     <svg className="places__sorting-arrow" width={7} height={4}>
                       <use xlinkHref="#icon-arrow-select"></use>
                     </svg>
                   </span>
-                  <Sort />
+                  {showSort && <Sort handleSortActive={handleSortActive} currentSortType={sortType}/>}
                 </form>
                 <Offers
-                  offers={currentOffers}
+                  offers={sortOffers}
                   offersCount={offersCount}
                   handleOfferHover={handleOfferHover}
                 />

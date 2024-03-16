@@ -4,12 +4,12 @@ export const Setting = {
   OffersCount: 4
 };
 
-export const PlacesOption = {
-  POPULAR: 'Popular',
-  PRICE_TO_HIGH: 'Price: low to high',
-  PRICE_TO_LOW: 'Price: high to low',
-  TOP_RATED: 'Top rated first'
-} as const;
+export enum PlacesOption {
+  Popular = 'Popular',
+  Price_to_high = 'Price: low to high',
+  Price_to_low = 'Price: high to low',
+  Top_rated = 'Top rated first'
+}
 
 export enum Locations {
   Paris ='Paris',
