@@ -9,7 +9,7 @@ import OfferEmpty from '../components/offer/offer-empty';
 import { useAppSelector } from '../hooks';
 import { selectCity, selectOffers } from '../store/selectors/offers';
 import { PlacesOption } from '../const';
-import { getSortOffersList } from '../utils';
+import { getCurrentOffersList, getSortOffersList } from '../utils';
 
 type MainPageScreenProps = {
   offersCount: number;
@@ -23,13 +23,18 @@ function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
   const offers = useAppSelector(selectOffers);
   const currentCity = useAppSelector(selectCity);
 
-  const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
-
+  const [currentOffers, setCurrentOffers] = useState<TOffer[] | []>(getCurrentOffersList(offers, currentCity));
   const [sortOffers, setSortOffers] = useState<TOffer[]>(currentOffers);
 
   useEffect(() => {
+    if (currentCity) {
+      setCurrentOffers(getCurrentOffersList(offers, currentCity));
+    }
+  }, [offers, currentCity]);
+
+  useEffect(() => {
     setSortOffers(getSortOffersList(sortType, currentOffers));
-  }, [sortType]);
+  }, [offers, sortType, currentOffers]);
 
   const handleOfferHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);

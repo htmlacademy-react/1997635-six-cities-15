@@ -1,4 +1,4 @@
-import { NEAR_OFFERS_COUNT, PlacesOption } from './const';
+import { Locations, NEAR_OFFERS_COUNT, PlacesOption } from './const';
 import { TOffer } from './types/offers';
 
 const getStrStartWithCapitalLetters = (data: string) => data.replace(data[0], data[0].toUpperCase());
@@ -29,4 +29,6 @@ const getSortOffersList = (sort: PlacesOption, offers: TOffer[]) => {
   }
 };
 
-export { getStrStartWithCapitalLetters, getNearOffers, getSortOffersList };
+const getCurrentOffersList = (offers: TOffer[], currentCity: Locations) => offers.filter((offer) => offer.city.name === currentCity);
+
+export { getStrStartWithCapitalLetters, getNearOffers, getSortOffersList, getCurrentOffersList };
