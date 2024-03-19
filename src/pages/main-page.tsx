@@ -23,7 +23,7 @@ function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
   const offers = useAppSelector(selectOffers);
   const currentCity = useAppSelector(selectCity);
 
-  const [currentOffers, setCurrentOffers] = useState<TOffer[] | []>(getCurrentOffersList(offers, currentCity));
+  const [currentOffers, setCurrentOffers] = useState<TOffer[]>(getCurrentOffersList(offers, currentCity));
   const [sortOffers, setSortOffers] = useState<TOffer[]>(currentOffers);
 
   useEffect(() => {
