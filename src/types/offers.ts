@@ -26,6 +26,9 @@ export type TOffer = {
   isPremium: boolean;
   rating: number;
   previewImage: string;
+};
+
+export type TAdditionalOptions = {
   description: string;
   bedrooms: number;
   goods: [string];
@@ -37,3 +40,5 @@ export type TOffer = {
   images: [string];
   maxAdults: number;
 };
+
+export type TFullOffer = TOffer & TAdditionalOptions;

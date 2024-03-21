@@ -11,11 +11,7 @@ import { selectCity, selectOffers } from '../store/selectors/offers';
 import { PlacesOption } from '../const';
 import { getCurrentOffersList, getSortOffersList } from '../utils';
 
-type MainPageScreenProps = {
-  offersCount: number;
-}
-
-function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
+function MainPage(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
   const [sortType, setSortType] = useState<PlacesOption>(PlacesOption.Popular);
   const [showSort, setShowSort] = useState<boolean>(false);
@@ -76,7 +72,6 @@ function MainPage({offersCount}: MainPageScreenProps): JSX.Element {
                 </form>
                 <Offers
                   offers={sortOffers}
-                  offersCount={offersCount}
                   handleOfferHover={handleOfferHover}
                 />
               </section>

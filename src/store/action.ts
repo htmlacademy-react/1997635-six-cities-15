@@ -4,5 +4,8 @@ import { Locations } from '../const';
 
 export const changeCity = createAction<Locations>('changeCity');
 
-export const getOfferList = createAction<TOffer[] | []>('getOfferList');
+export const getOfferList = createAction<TOffer[]>('data/getOfferList');
+
+export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingStatus');
+
 

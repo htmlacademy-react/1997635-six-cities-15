@@ -9,18 +9,28 @@ import NotFoundPage from '../../pages/not-found-page';
 import Layout from '../layout/layout';
 import ScrollToTop from '../scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
+import Loader from '../loader/loader';
 import { getAuthorizationStatus } from '../../mock/getAuthorizationStatus';
 import type { TOffer } from '../../types/offers';
 import type { TReview } from '../../types/reviews';
+import { useAppSelector } from '../../hooks';
 
 type AppScreenProps = {
-  offersCount: number;
   reviews: TReview[];
   favorites: TOffer[];
 }
 
-function App({offersCount, reviews, favorites}: AppScreenProps): JSX.Element {
+function App({reviews, favorites}: AppScreenProps): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
+
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+
+  if(isDataLoading) {
+    return (
+      <Loader />
+    );
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -29,7 +39,7 @@ function App({offersCount, reviews, favorites}: AppScreenProps): JSX.Element {
           <Route path={AppRoute.Main} element={<Layout favorites={favorites}/>}>
             <Route
               index
-              element={<MainPage offersCount={offersCount}/>}
+              element={<MainPage/>}
             />
             <Route
               path={AppRoute.Login}
