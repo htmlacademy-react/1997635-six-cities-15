@@ -19,8 +19,8 @@ function MainPage(): JSX.Element {
   const offers = useAppSelector(selectOffers);
   const currentCity = useAppSelector(selectCity);
 
-  const [currentOffers, setCurrentOffers] = useState<TOffer[]>(getCurrentOffersList(offers, currentCity));
-  const [sortOffers, setSortOffers] = useState<TOffer[]>(currentOffers);
+  const [currentOffers, setCurrentOffers] = useState<Nullable<TOffer[]>>(getCurrentOffersList(offers, currentCity));
+  const [sortOffers, setSortOffers] = useState<Nullable<TOffer[]>>(currentOffers);
 
   useEffect(() => {
     if (currentCity) {

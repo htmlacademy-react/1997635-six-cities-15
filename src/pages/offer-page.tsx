@@ -11,8 +11,11 @@ import Favorite from '../components/ui/favorite';
 import Rating from '../components/ui/rating';
 import OfferItem from '../components/offer/offer-item';
 import Map from '../components/map/map';
-import { useAppSelector } from '../hooks';
-import { selectOffers } from '../store/selectors/offers';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { selectCurrentOffer, selectIsDataLoading, selectOffers } from '../store/selectors/offers';
+import { fetchOfferByIdAction } from '../store/api-actions';
+import { useEffect } from 'react';
+import Loader from '../components/loader/loader';
 
 type OfferPageScreenProps = {
   reviews: TReview[];
@@ -20,15 +23,29 @@ type OfferPageScreenProps = {
 
 function OfferPage ({reviews} : OfferPageScreenProps) {
   const offers = useAppSelector(selectOffers);
+  const isDataLoading = useAppSelector(selectIsDataLoading);
+  const currentOffer = useAppSelector(selectCurrentOffer);
 
   const {id: currentId} = useParams();
+  const dispatch = useAppDispatch();
 
-  const currentOffer = offers.find((offer) => offer.id === currentId);
+  useEffect(()=> {
+    if (currentId){
+      dispatch(fetchOfferByIdAction(currentId));
+    }
+  }, [dispatch, currentId]);
 
+  /*
   if (!currentOffer) {
     return <Navigate to={AppRoute.Main}/>;
   }
+  */
 
+  if(isDataLoading) {
+    return (
+      <Loader />
+    );
+  }
   const {title, type, price, isFavorite, isPremium, rating, images, bedrooms, maxAdults, host, description} = currentOffer;
 
   const nearOffers = getNearOffers(offers, currentOffer);

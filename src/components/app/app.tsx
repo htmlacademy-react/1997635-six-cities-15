@@ -14,6 +14,7 @@ import { getAuthorizationStatus } from '../../mock/getAuthorizationStatus';
 import type { TOffer } from '../../types/offers';
 import type { TReview } from '../../types/reviews';
 import { useAppSelector } from '../../hooks';
+import { selectIsDataLoading } from '../../store/selectors/offers';
 
 type AppScreenProps = {
   reviews: TReview[];
@@ -23,7 +24,7 @@ type AppScreenProps = {
 function App({reviews, favorites}: AppScreenProps): JSX.Element {
   const authorizationStatus = getAuthorizationStatus();
 
-  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+  const isDataLoading = useAppSelector(selectIsDataLoading);
 
   if(isDataLoading) {
     return (
