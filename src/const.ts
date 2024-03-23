@@ -1,8 +1,8 @@
 export const MIN_LENGTH_COMMENT = 50;
 
-export const Setting = {
+/*export const Setting = {
   OffersCount: 4
-};
+};*/
 
 export enum PlacesOption {
   Popular = 'Popular',
@@ -121,4 +121,11 @@ export const TileLayerPattern = {
 } as const;
 
 export const NEAR_OFFERS_COUNT = 3;
+
+export enum APIRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Login = '/login',
+  Logout = '/logout'
+}
 
