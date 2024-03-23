@@ -25,21 +25,23 @@ function OfferPage ({reviews} : OfferPageScreenProps) {
   const offers = useAppSelector(selectOffers);
   const isDataLoading = useAppSelector(selectIsDataLoading);
   const currentOffer = useAppSelector(selectCurrentOffer);
-
   const {id: currentId} = useParams();
+
   const dispatch = useAppDispatch();
 
   useEffect(()=> {
-    if (currentId){
+    if (!currentOffer && currentId){
+      dispatch(fetchOfferByIdAction(currentId));
+    } else if (currentId && currentOffer && currentId !== currentOffer.id){
       dispatch(fetchOfferByIdAction(currentId));
     }
-  }, [dispatch, currentId]);
+  }, [dispatch, currentId, currentOffer]);
 
-  /*
+
   if (!currentOffer) {
     return <Navigate to={AppRoute.Main}/>;
   }
-  */
+
 
   if(isDataLoading) {
     return (
