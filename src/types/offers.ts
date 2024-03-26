@@ -28,7 +28,7 @@ export type TOffer = {
   previewImage: string;
 };
 
-export type TAdditionalOptions = {
+type TAdditionalOptions = {
   description: string;
   bedrooms: number;
   goods: [string];

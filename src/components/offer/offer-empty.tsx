@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { selectCity } from '../../store/selectors/offers';
+import { selectCity } from '../../store/selectors/selectors';
 
 function OfferEmpty () {
   const currentCity = useAppSelector(selectCity);

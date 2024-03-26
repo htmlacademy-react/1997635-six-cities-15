@@ -1,7 +1,7 @@
 import { Locations } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity } from '../../store/action';
-import { selectCity } from '../../store/selectors/offers';
+import { selectCity } from '../../store/selectors/selectors';
 
 type TabItemProps = {
   place: Locations;

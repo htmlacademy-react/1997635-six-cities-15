@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import MainPage from '../../pages/main-page';
 import LoginPage from '../../pages/login-page';
 import FavoritesPage from '../../pages/favorites-page';
@@ -10,11 +10,10 @@ import Layout from '../layout/layout';
 import ScrollToTop from '../scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import Loader from '../loader/loader';
-import { getAuthorizationStatus } from '../../mock/getAuthorizationStatus';
 import type { TOffer } from '../../types/offers';
 import type { TReview } from '../../types/reviews';
 import { useAppSelector } from '../../hooks';
-import { selectIsDataLoading } from '../../store/selectors/offers';
+import { selectAuthorizationStatus, selectIsDataLoading } from '../../store/selectors/selectors';
 
 type AppScreenProps = {
   reviews: TReview[];
@@ -22,11 +21,11 @@ type AppScreenProps = {
 }
 
 function App({reviews, favorites}: AppScreenProps): JSX.Element {
-  const authorizationStatus = getAuthorizationStatus();
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   const isDataLoading = useAppSelector(selectIsDataLoading);
 
-  if(isDataLoading) {
+  if(authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
     return (
       <Loader />
     );

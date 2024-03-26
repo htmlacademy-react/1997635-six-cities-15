@@ -8,9 +8,15 @@ const selectCity = (state: State) => state.currentCity;
 
 const selectIsDataLoading = (state: State) => state.isDataLoading;
 
+const selectAuthorizationStatus = (state: State) => state.authorizationStatus;
+
+const selectUserEmail = (state: State) => state.userEmail;
+
 export {
   selectCity,
   selectOffers,
   selectCurrentOffer,
-  selectIsDataLoading
+  selectIsDataLoading,
+  selectAuthorizationStatus,
+  selectUserEmail
 };
