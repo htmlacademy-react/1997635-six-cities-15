@@ -7,7 +7,7 @@ import Tabs from '../components/tabs/tabs';
 import type { TOffer } from '../types/offers';
 import OfferEmpty from '../components/offer/offer-empty';
 import { useAppSelector } from '../hooks';
-import { selectCity, selectOffers } from '../store/selectors/offers';
+import { selectCity, selectOffers } from '../store/selectors/selectors';
 import { PlacesOption } from '../const';
 import { getCurrentOffersList, getSortOffersList } from '../utils';
 
@@ -19,8 +19,8 @@ function MainPage(): JSX.Element {
   const offers = useAppSelector(selectOffers);
   const currentCity = useAppSelector(selectCity);
 
-  const [currentOffers, setCurrentOffers] = useState<Nullable<TOffer[]>>(getCurrentOffersList(offers, currentCity));
-  const [sortOffers, setSortOffers] = useState<Nullable<TOffer[]>>(currentOffers);
+  const [currentOffers, setCurrentOffers] = useState<TOffer[]>(getCurrentOffersList(offers, currentCity));
+  const [sortOffers, setSortOffers] = useState<TOffer[]>(currentOffers);
 
   useEffect(() => {
     if (currentCity) {

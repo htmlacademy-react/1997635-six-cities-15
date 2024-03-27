@@ -6,7 +6,7 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT, LocationsData } from '../../con
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
 import { useAppSelector } from '../../hooks';
-import { selectCity } from '../../store/selectors/offers';
+import { selectCity } from '../../store/selectors/selectors';
 
 type MapProps = {
   offers: TOffer[];

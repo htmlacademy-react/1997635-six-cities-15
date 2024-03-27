@@ -1,6 +1,6 @@
-import type { TOffer } from '../types/offers';
+import type { TFullOffer } from '../types/offers';
 
-export const Favorites: TOffer[] = [
+export const Favorites: TFullOffer[] = [
   {
     id: 'fce895d5-7d44-4f97-8674-89c052961e5b',
     title: 'Canal View Prinsengracht',

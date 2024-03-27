@@ -1,15 +1,16 @@
 import ReviewForm from './review-form';
 import ReviewList from './review-list';
-import { getAuthorizationStatus } from '../../mock/getAuthorizationStatus';
 import { AuthorizationStatus } from '../../const';
 import type { TReview } from '../../types/reviews';
+import { useAppSelector } from '../../hooks';
+import { selectAuthorizationStatus } from '../../store/selectors/selectors';
 
 type ReviewProps = {
   reviews: TReview[];
 }
 
 function Review ({reviews} : ReviewProps) : JSX.Element {
-  const authorizationStatus = getAuthorizationStatus();
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   const reviewsCount = reviews.length;
 

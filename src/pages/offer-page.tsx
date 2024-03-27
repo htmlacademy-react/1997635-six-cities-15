@@ -12,7 +12,7 @@ import Rating from '../components/ui/rating';
 import OfferItem from '../components/offer/offer-item';
 import Map from '../components/map/map';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectCurrentOffer, selectIsDataLoading, selectOffers } from '../store/selectors/offers';
+import { selectCurrentOffer, selectIsDataLoading, selectOffers } from '../store/selectors/selectors';
 import { fetchOfferByIdAction } from '../store/api-actions';
 import { useEffect } from 'react';
 import Loader from '../components/loader/loader';
@@ -32,7 +32,7 @@ function OfferPage ({reviews} : OfferPageScreenProps) {
   useEffect(()=> {
     if (!currentOffer && currentId){
       dispatch(fetchOfferByIdAction(currentId));
-    } else if (currentId && currentOffer && currentId !== currentOffer.id){
+    } else if (currentId && currentOffer && currentId !== currentOffer?.id){
       dispatch(fetchOfferByIdAction(currentId));
     }
   }, [dispatch, currentId, currentOffer]);
