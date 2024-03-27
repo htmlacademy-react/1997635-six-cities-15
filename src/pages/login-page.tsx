@@ -4,17 +4,16 @@ import { Helmet } from 'react-helmet-async';
 import { FormEvent, useState } from 'react';
 import { useAppDispatch } from '../hooks';
 import { loginAction } from '../store/api-actions';
-//import { AuthData } from '../types/auth-data';
 
 function LoginPage () {
-  const [login, setLogin] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
+  const [login, setLogin] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if(login !== null && password !== null) {
+    if(login !== '' && password !== '') {
       dispatch(loginAction({
         login: login,
         password: password
@@ -44,6 +43,7 @@ function LoginPage () {
                 placeholder="Email"
                 onChange={(evt) => setLogin(evt.target.value)}
                 required
+                value={login}
               />
             </div>
             <div className="login__input-wrapper form__input-wrapper">
@@ -55,6 +55,7 @@ function LoginPage () {
                 placeholder="Password"
                 onChange={(evt) => setPassword(evt.target.value)}
                 required
+                value={password}
               />
             </div>
             <button
