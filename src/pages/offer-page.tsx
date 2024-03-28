@@ -1,8 +1,7 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../const';
-import type { TReview } from '../types/reviews';
-import { getStrStartWithCapitalLetters, getNearOffers } from '../utils';
+import { getStrStartWithCapitalLetters } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
 import Review from '../components/review/review';
@@ -12,17 +11,14 @@ import Rating from '../components/ui/rating';
 import OfferItem from '../components/offer/offer-item';
 import Map from '../components/map/map';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectCurrentOffer, selectIsDataLoading, selectOffers } from '../store/selectors/selectors';
-import { fetchOfferByIdAction } from '../store/api-actions';
+import { selectCurrentOffer, selectIsDataLoading, selectNearOffers } from '../store/selectors/selectors';
+import { fetchNearOffersAction, fetchOfferByIdAction, fetchReviewsListAction } from '../store/api-actions';
 import { useEffect } from 'react';
 import Loader from '../components/loader/loader';
 
-type OfferPageScreenProps = {
-  reviews: TReview[];
-}
+function OfferPage () {
+  const nearOffers = useAppSelector(selectNearOffers);
 
-function OfferPage ({reviews} : OfferPageScreenProps) {
-  const offers = useAppSelector(selectOffers);
   const isDataLoading = useAppSelector(selectIsDataLoading);
   const currentOffer = useAppSelector(selectCurrentOffer);
   const {id: currentId} = useParams();
@@ -32,8 +28,12 @@ function OfferPage ({reviews} : OfferPageScreenProps) {
   useEffect(()=> {
     if (!currentOffer && currentId){
       dispatch(fetchOfferByIdAction(currentId));
+      dispatch(fetchNearOffersAction(currentId));
+      dispatch(fetchReviewsListAction(currentId));
     } else if (currentId && currentOffer && currentId !== currentOffer?.id){
       dispatch(fetchOfferByIdAction(currentId));
+      dispatch(fetchNearOffersAction(currentId));
+      dispatch(fetchReviewsListAction(currentId));
     }
   }, [dispatch, currentId, currentOffer]);
 
@@ -49,8 +49,6 @@ function OfferPage ({reviews} : OfferPageScreenProps) {
     );
   }
   const {title, type, price, isFavorite, isPremium, rating, images, bedrooms, maxAdults, host, description} = currentOffer;
-
-  const nearOffers = getNearOffers(offers, currentOffer);
 
   const nearOffersPlusCurrent = [...nearOffers, currentOffer];
 
@@ -107,7 +105,7 @@ function OfferPage ({reviews} : OfferPageScreenProps) {
                 </p>
               </div>
             </div>
-            <Review reviews={reviews}/>
+            <Review />
           </div>
         </div>
         <Map

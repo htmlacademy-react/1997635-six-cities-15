@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, getOfferById, getOfferList, setDataLoadingStatus, setAuthorizationStatus, setUserEmail } from './action';
+import { changeCity, getOfferById, getOfferList, setDataLoadingStatus, setAuthorizationStatus, setUserEmail, getNearOffers, getReviewsList, getFavorites } from './action';
 import { AuthorizationStatus, DEFAULT_CITY, Locations } from '../const';
 import { TOffer, TFullOffer } from '../types/offers';
+import { TReview } from '../types/reviews';
 
 type TInitialState ={
   currentCity: Locations;
@@ -10,6 +11,9 @@ type TInitialState ={
   currentOffer: TFullOffer | null;
   authorizationStatus: AuthorizationStatus;
   userEmail: string | null;
+  nearOffers: TOffer[];
+  reviewsList: TReview[];
+  favorites: TOffer[];
 }
 
 const initialState: TInitialState = {
@@ -19,6 +23,9 @@ const initialState: TInitialState = {
   currentOffer: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   userEmail: null,
+  nearOffers: [],
+  reviewsList: [],
+  favorites: []
 };
 
 const reducer = createReducer(initialState, (builder) =>{
@@ -40,6 +47,15 @@ const reducer = createReducer(initialState, (builder) =>{
     })
     .addCase(setUserEmail, (state, action) => {
       state.userEmail = action.payload;
+    })
+    .addCase(getNearOffers, (state, action) => {
+      state.nearOffers = action.payload;
+    })
+    .addCase(getReviewsList, (state, action) => {
+      state.reviewsList = action.payload;
+    })
+    .addCase(getFavorites, (state, action) => {
+      state.favorites = action.payload;
     });
 });
 

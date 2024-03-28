@@ -3,12 +3,12 @@ import type { TOffer } from '../types/offers';
 import { Locations } from '../const';
 import FavoritesLocation from '../components/favorites-location/favorites-location';
 import FavoriteEmpty from '../components/favorites-location/favorite-empty';
+import { useAppSelector } from '../hooks';
+import { selectFavorites } from '../store/selectors/selectors';
 
-type FavoritesPageProps = {
-  favorites: TOffer[];
-}
+function FavoritesPage () : JSX.Element {
 
-function FavoritesPage ({favorites} : FavoritesPageProps) : JSX.Element {
+  const favorites = useAppSelector(selectFavorites);
 
   const isEmptyFavorites = favorites.length === 0;
 
