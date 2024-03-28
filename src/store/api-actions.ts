@@ -7,7 +7,7 @@ import { getOfferList, setDataLoadingStatus, getOfferById, setAuthorizationStatu
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
-import { TReview } from '../types/reviews';
+import { TReview, TReviewForm } from '../types/reviews';
 
 export const fetchOfferListAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -66,6 +66,21 @@ export const fetchReviewsListAction = createAsyncThunk<void, string, {
     const {data} = await api.get<TReview[]>(`${APIRoute.Comments}/${id}`);
     dispatch(setDataLoadingStatus(false));
     dispatch(getReviewsList(data));
+  }
+);
+
+export const fetchReviewAction = createAsyncThunk<void, {id: string; reviewValues: TReviewForm}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  'data/fetchReview',
+  async ({id, reviewValues}, {dispatch, extra: api}) => {
+    const data = await api.post<TReview[]>(`${APIRoute.Comments}/${id}`, reviewValues);
+    if(data.status === 201) {
+      dispatch(fetchReviewsListAction(id));
+    }
   }
 );
 

@@ -4,7 +4,11 @@ import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { selectAuthorizationStatus, selectReviewsList } from '../../store/selectors/selectors';
 
-function Review () : JSX.Element {
+type ReviewProps = {
+  id: string | undefined;
+}
+
+function Review ({id}: ReviewProps) : JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const reviews = useAppSelector(selectReviewsList);
 
@@ -18,7 +22,7 @@ function Review () : JSX.Element {
           <ReviewList />
         </>
       )}
-      {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm id={id}/>}
     </section>
   );
 }

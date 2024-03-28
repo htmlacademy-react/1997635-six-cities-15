@@ -1,10 +1,32 @@
-import { useState, ChangeEvent, Fragment } from 'react';
+import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
 import { MIN_LENGTH_COMMENT, RatingValues } from '../../const';
+import { TReviewForm } from '../../types/reviews';
+import { useAppDispatch } from '../../hooks';
+import { fetchReviewAction } from '../../store/api-actions';
 
-function ReviewForm () {
-  const [formValues, setFormValues] = useState<{rating: null | number; comment: string}>({rating: null, comment: ''});
+type ReviewFormProps = {
+  id: string | undefined;
+}
+
+function ReviewForm ({id}: ReviewFormProps) {
+  const [formValues, setFormValues] = useState<TReviewForm>({rating: null, comment: ''});
+
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if(id) {
+      dispatch(fetchReviewAction({id, reviewValues: formValues}));
+    }
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RatingValues.map((value) => (

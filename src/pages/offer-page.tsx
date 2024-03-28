@@ -105,7 +105,7 @@ function OfferPage () {
                 </p>
               </div>
             </div>
-            <Review />
+            <Review id={currentId}/>
           </div>
         </div>
         <Map
