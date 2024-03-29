@@ -10,8 +10,6 @@ const selectIsDataLoading = (state: State) => state.isDataLoading;
 
 const selectAuthorizationStatus = (state: State) => state.authorizationStatus;
 
-const selectUserEmail = (state: State) => state.userEmail;
-
 const selectNearOffers = (state: State) => state.nearOffers;
 
 const selectReviewsList = (state: State) => state.reviewsList;
@@ -24,7 +22,6 @@ export {
   selectCurrentOffer,
   selectIsDataLoading,
   selectAuthorizationStatus,
-  selectUserEmail,
   selectNearOffers,
   selectReviewsList,
   selectFavorites,

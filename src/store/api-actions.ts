@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { APIRoute, AuthorizationStatus } from '../const';
 import { TFullOffer, TOffer } from '../types/offers';
-import { getOfferList, setDataLoadingStatus, getOfferById, setAuthorizationStatus, setUserEmail, getNearOffers, getReviewsList, getFavorites, changeFavoriteStatusInCurrentOffer } from './action';
+import { getOfferList, setDataLoadingStatus, getOfferById, setAuthorizationStatus, getNearOffers, getReviewsList, getFavorites, changeFavoriteStatusInCurrentOffer } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
@@ -145,9 +145,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data: {token, email: userEmail}} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(token);
+    saveToken(token, userEmail);
     dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
-    dispatch(setUserEmail(userEmail));
   },
 );
 
@@ -162,7 +161,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
-    dispatch(setUserEmail(null));
   },
 );
 
