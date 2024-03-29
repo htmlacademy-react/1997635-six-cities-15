@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, getOfferById, getOfferList, setDataLoadingStatus, setAuthorizationStatus, setUserEmail, getNearOffers, getReviewsList, getFavorites } from './action';
+import { changeCity, getOfferById, getOfferList, setDataLoadingStatus, setAuthorizationStatus, setUserEmail, getNearOffers, getReviewsList, getFavorites, changeFavoriteStatusInCurrentOffer } from './action';
 import { AuthorizationStatus, DEFAULT_CITY, Locations } from '../const';
 import { TOffer, TFullOffer } from '../types/offers';
 import { TReview } from '../types/reviews';
@@ -56,6 +56,11 @@ const reducer = createReducer(initialState, (builder) =>{
     })
     .addCase(getFavorites, (state, action) => {
       state.favorites = action.payload;
+    })
+    .addCase(changeFavoriteStatusInCurrentOffer, (state, action) => {
+      if(state.currentOffer !== null){
+        state.currentOffer.isFavorite = action.payload;
+      }
     });
 });
 

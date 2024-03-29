@@ -27,5 +27,5 @@ export {
   selectUserEmail,
   selectNearOffers,
   selectReviewsList,
-  selectFavorites
+  selectFavorites,
 };

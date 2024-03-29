@@ -20,3 +20,5 @@ export const getNearOffers = createAction<TOffer[]>('data/getNearOffers');
 export const getReviewsList = createAction<TReview[]>('data/getReviewsList');
 
 export const getFavorites = createAction<TOffer[]>('data/getFavorites');
+
+export const changeFavoriteStatusInCurrentOffer = createAction<boolean>('data/changeFavoriteStatusInCurrentOffer');

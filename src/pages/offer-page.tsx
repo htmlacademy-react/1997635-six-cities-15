@@ -1,6 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { AppRoute } from '../const';
+import { AppRoute, AuthorizationStatus } from '../const';
 import { getStrStartWithCapitalLetters } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
@@ -11,13 +11,14 @@ import Rating from '../components/ui/rating';
 import OfferItem from '../components/offer/offer-item';
 import Map from '../components/map/map';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectCurrentOffer, selectIsDataLoading, selectNearOffers } from '../store/selectors/selectors';
+import { selectAuthorizationStatus, selectCurrentOffer, selectIsDataLoading, selectNearOffers } from '../store/selectors/selectors';
 import { fetchNearOffersAction, fetchOfferByIdAction, fetchReviewsListAction } from '../store/api-actions';
 import { useEffect } from 'react';
 import Loader from '../components/loader/loader';
 
 function OfferPage () {
   const nearOffers = useAppSelector(selectNearOffers);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   const isDataLoading = useAppSelector(selectIsDataLoading);
   const currentOffer = useAppSelector(selectCurrentOffer);
@@ -66,7 +67,8 @@ function OfferPage () {
               <h1 className="offer__name">
                 {title}
               </h1>
-              <Favorite isOfferCard={false} isFavorite={isFavorite}/>
+              {authorizationStatus === AuthorizationStatus.Auth ?
+                <Favorite isOfferCard={false} isFavorite={isFavorite} id={currentId}/> : ''}
             </div>
             <div className="offer__rating rating">
               <Rating isOffer rating={rating}/>
