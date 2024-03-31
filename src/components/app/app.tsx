@@ -10,17 +10,11 @@ import Layout from '../layout/layout';
 import ScrollToTop from '../scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import Loader from '../loader/loader';
-import type { TOffer } from '../../types/offers';
-import type { TReview } from '../../types/reviews';
 import { useAppSelector } from '../../hooks';
 import { selectAuthorizationStatus, selectIsDataLoading } from '../../store/selectors/selectors';
 
-type AppScreenProps = {
-  reviews: TReview[];
-  favorites: TOffer[];
-}
 
-function App({reviews, favorites}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   const isDataLoading = useAppSelector(selectIsDataLoading);
@@ -36,7 +30,7 @@ function App({reviews, favorites}: AppScreenProps): JSX.Element {
       <BrowserRouter>
         <ScrollToTop/>
         <Routes>
-          <Route path={AppRoute.Main} element={<Layout favorites={favorites}/>}>
+          <Route path={AppRoute.Main} element={<Layout />}>
             <Route
               index
               element={<MainPage/>}
@@ -44,7 +38,7 @@ function App({reviews, favorites}: AppScreenProps): JSX.Element {
             <Route
               path={AppRoute.Login}
               element={
-                <PrivateRoute authorizationStatus={authorizationStatus} isReverse>
+                <PrivateRoute isReverse>
                   <LoginPage/>
                 </PrivateRoute>
               }
@@ -52,15 +46,15 @@ function App({reviews, favorites}: AppScreenProps): JSX.Element {
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute authorizationStatus={authorizationStatus}>
-                  <FavoritesPage favorites={favorites}/>
+                <PrivateRoute>
+                  <FavoritesPage />
                 </PrivateRoute>
               }
             />
             <Route path={AppRoute.Offer}>
               <Route
                 path=':id'
-                element={<OfferPage reviews={reviews}/>}
+                element={<OfferPage />}
               />
             </Route>
           </Route>

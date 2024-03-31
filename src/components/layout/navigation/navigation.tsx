@@ -1,18 +1,15 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const';
-import type { TOffer } from '../../../types/offers';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { selectAuthorizationStatus, selectUserEmail } from '../../../store/selectors/selectors';
+import { selectAuthorizationStatus, selectFavorites } from '../../../store/selectors/selectors';
 import { logoutAction } from '../../../store/api-actions';
 import { MouseEvent } from 'react';
+import { getUserEmail } from '../../../services/token';
 
-type NavigationProps = {
-  favorites: TOffer[];
-}
-
-function Navigation ({favorites} : NavigationProps) : JSX.Element {
+function Navigation () : JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const userEmail = useAppSelector(selectUserEmail);
+  const userEmail = getUserEmail();
+  const favorites = useAppSelector(selectFavorites);
 
   const favoritesCount = favorites.length;
 

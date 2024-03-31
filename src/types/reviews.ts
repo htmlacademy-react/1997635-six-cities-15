@@ -9,3 +9,9 @@ export type TReview = {
   comment: string;
   rating: number;
 };
+
+
+export type TReviewForm ={
+  rating: null | number;
+  comment: string;
+}

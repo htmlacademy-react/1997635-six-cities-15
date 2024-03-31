@@ -1,16 +1,16 @@
 import ReviewForm from './review-form';
 import ReviewList from './review-list';
 import { AuthorizationStatus } from '../../const';
-import type { TReview } from '../../types/reviews';
 import { useAppSelector } from '../../hooks';
-import { selectAuthorizationStatus } from '../../store/selectors/selectors';
+import { selectAuthorizationStatus, selectReviewsList } from '../../store/selectors/selectors';
 
 type ReviewProps = {
-  reviews: TReview[];
+  id: string | undefined;
 }
 
-function Review ({reviews} : ReviewProps) : JSX.Element {
+function Review ({id}: ReviewProps) : JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const reviews = useAppSelector(selectReviewsList);
 
   const reviewsCount = reviews.length;
 
@@ -19,10 +19,10 @@ function Review ({reviews} : ReviewProps) : JSX.Element {
       {reviewsCount !== 0 && (
         <>
           <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
-          <ReviewList reviews={reviews}/>
+          <ReviewList />
         </>
       )}
-      {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewForm id={id}/>}
     </section>
   );
 }
