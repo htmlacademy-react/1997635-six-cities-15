@@ -1,6 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute, AuthorizationStatus, StatusLoading } from '../const';
 import { getStrStartWithCapitalLetters } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
@@ -11,16 +11,18 @@ import Rating from '../components/ui/rating';
 import OfferItem from '../components/offer/offer-item';
 import Map from '../components/map/map';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectAuthorizationStatus, selectCurrentOffer, selectIsDataLoading, selectNearOffers } from '../store/selectors/selectors';
 import { fetchNearOffersAction, fetchOfferByIdAction, fetchReviewsListAction } from '../store/api-actions';
 import { useEffect } from 'react';
 import Loader from '../components/loader/loader';
+import { selectCurrentOffer, selectNearOffers } from '../store/offer-process/offer-process.selectors';
+import { selectAuthorizationStatus } from '../store/user-process/user-process.selectors';
+import { selectStatusLoading } from '../store/offers-process/offers-process.selectors';
 
 function OfferPage () {
   const nearOffers = useAppSelector(selectNearOffers);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
-  const isDataLoading = useAppSelector(selectIsDataLoading);
+  const statusLoading = useAppSelector(selectStatusLoading);
   const currentOffer = useAppSelector(selectCurrentOffer);
   const {id: currentId} = useParams();
 
@@ -44,7 +46,7 @@ function OfferPage () {
   }
 
 
-  if(isDataLoading) {
+  if(statusLoading === StatusLoading.Loading) {
     return (
       <Loader />
     );

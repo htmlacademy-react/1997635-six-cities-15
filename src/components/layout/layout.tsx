@@ -3,8 +3,8 @@ import { AppRoute } from '../../const';
 import Header from './header';
 import Footer from './footer';
 import { useAppSelector } from '../../hooks';
-import { selectFavorites } from '../../store/selectors/selectors';
 import { getLayoutState } from '../../utils';
+import { selectFavorites } from '../../store/favorites-process/favorites-process.selectors';
 
 function Layout () : JSX.Element {
   const {pathname} = useLocation();

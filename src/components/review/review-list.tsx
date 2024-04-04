@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { selectReviewsList } from '../../store/selectors/selectors';
+import { selectReviewsList } from '../../store/comments-process/comments-process.selectors';
 import ReviewItem from './review-item';
 
 function ReviewList (): JSX.Element {

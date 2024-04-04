@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus, StatusLoading } from '../../const';
 import MainPage from '../../pages/main-page';
 import LoginPage from '../../pages/login-page';
 import FavoritesPage from '../../pages/favorites-page';
@@ -11,15 +11,16 @@ import ScrollToTop from '../scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import Loader from '../loader/loader';
 import { useAppSelector } from '../../hooks';
-import { selectAuthorizationStatus, selectIsDataLoading } from '../../store/selectors/selectors';
+import { selectAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { selectStatusLoading } from '../../store/offers-process/offers-process.selectors';
 
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
-  const isDataLoading = useAppSelector(selectIsDataLoading);
+  const statusLoading = useAppSelector(selectStatusLoading);
 
-  if(authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
+  if(authorizationStatus === AuthorizationStatus.Unknown || statusLoading === StatusLoading.Loading) {
     return (
       <Loader />
     );

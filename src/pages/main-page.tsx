@@ -7,9 +7,9 @@ import Tabs from '../components/tabs/tabs';
 import type { TOffer } from '../types/offers';
 import OfferEmpty from '../components/offer/offer-empty';
 import { useAppSelector } from '../hooks';
-import { selectCity, selectOffers } from '../store/selectors/selectors';
 import { PlacesOption } from '../const';
 import { getCurrentOffersList, getSortOffersList } from '../utils';
+import { selectCity, selectOffers } from '../store/offers-process/offers-process.selectors';
 
 function MainPage(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);

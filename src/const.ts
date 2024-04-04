@@ -1,9 +1,5 @@
 export const MIN_LENGTH_COMMENT = 50;
 
-/*export const Setting = {
-  OffersCount: 4
-};*/
-
 export enum PlacesOption {
   Popular = 'Popular',
   Price_to_high = 'Price: low to high',
@@ -120,13 +116,26 @@ export const TileLayerPattern = {
   ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
 } as const;
 
-export const NEAR_OFFERS_COUNT = 3;
-
 export enum APIRoute {
   Offers = '/offers',
   Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
   Comments = '/comments'
+}
+
+export enum NameSpace {
+  Offers = 'OFFERS',
+  Offer = 'OFFER',
+  Favorite = 'FAVORITE',
+  Comments = 'COMMENTS',
+  User = 'USER',
+}
+
+export enum StatusLoading {
+  None,
+  Loading,
+  Success,
+  Failed,
 }
 

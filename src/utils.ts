@@ -1,23 +1,7 @@
-import { AppRoute, Locations, NEAR_OFFERS_COUNT, PlacesOption } from './const';
+import { AppRoute, Locations, PlacesOption } from './const';
 import { TOffer } from './types/offers';
 
 const getStrStartWithCapitalLetters = (data: string) => data.replace(data[0], data[0].toUpperCase());
-
-const getNearOffers = (offers: TOffer[] | null, currentOffer: TOffer): TOffer[] => {
-  let lastInd = 0;
-  const nearOffers = new Set<TOffer>();
-
-  if(offers === null){
-    return [];
-  }
-  while (nearOffers.size < NEAR_OFFERS_COUNT) {
-    if(offers[lastInd].id !== currentOffer.id){
-      nearOffers.add(offers[lastInd]);
-    }
-    lastInd ++;
-  }
-  return [...nearOffers];
-};
 
 const getSortOffersList = (sort: PlacesOption, offers: TOffer[]) => {
   switch(sort) {
@@ -57,4 +41,4 @@ const getLayoutState = (pathname: AppRoute, favorites: TOffer[]) => {
   return {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter};
 };
 
-export { getStrStartWithCapitalLetters, getNearOffers, getSortOffersList, getCurrentOffersList, getLayoutState };
+export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState };
