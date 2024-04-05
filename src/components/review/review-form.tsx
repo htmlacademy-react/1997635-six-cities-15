@@ -1,8 +1,9 @@
 import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
-import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, RatingValues } from '../../const';
+import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, RatingValues, StatusLoading } from '../../const';
 import { TReviewForm } from '../../types/reviews';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
+import { selectStatusLoading } from '../../store/comments-process/comments-process.selectors';
 
 type ReviewFormProps = {
   id: string | undefined;
@@ -10,6 +11,10 @@ type ReviewFormProps = {
 
 function ReviewForm ({id}: ReviewFormProps) {
   const [formValues, setFormValues] = useState<TReviewForm>({rating: null, comment: ''});
+
+  const statusLoading = useAppSelector(selectStatusLoading);
+
+  const isLoading = statusLoading === StatusLoading.Loading;
 
   const dispatch = useAppDispatch();
 
@@ -44,6 +49,7 @@ function ReviewForm ({id}: ReviewFormProps) {
                 });
               }}
               checked={Number(formValues.rating) === value}
+              disabled={isLoading}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
               <svg className="form__star-image" width={37} height={33}>
@@ -65,12 +71,13 @@ function ReviewForm ({id}: ReviewFormProps) {
           });
         }}
         maxLength={MAX_LENGTH_COMMENT}
+        disabled={isLoading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(formValues.rating && formValues.comment.length >= MIN_LENGTH_COMMENT)}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isLoading || !(formValues.rating && formValues.comment.length >= MIN_LENGTH_COMMENT)}>Submit</button>
       </div>
     </form>
   );
