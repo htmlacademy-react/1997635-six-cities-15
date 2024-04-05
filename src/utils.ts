@@ -1,4 +1,4 @@
-import { AppRoute, Locations, MAX_IMAGES_COUNT, MAX_NEAR_OFFERS_COUNT, MAX_REVIEWS_COUNT, PlacesOption } from './const';
+import { AppRoute, Locations, MAX_IMAGES_COUNT, MAX_NEAR_OFFERS_COUNT, MAX_REVIEWS_COUNT, MIN_LENGTH_PASSWORD, PlacesOption } from './const';
 import { TOffer } from './types/offers';
 import { TReview } from './types/reviews';
 
@@ -71,4 +71,8 @@ const getShownNearOffers = (nearOffers: TOffer[]) => {
   return nearOffers.slice(0, MAX_NEAR_OFFERS_COUNT);
 };
 
-export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews, getImagesFromGallery, getShownNearOffers };
+const checkPassword = (password: string) => password.length >= MIN_LENGTH_PASSWORD && /\d/.test(password) && /[a-zа-яё]+/i.test(password);
+
+const checkLogin = (login: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(login);
+
+export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews, getImagesFromGallery, getShownNearOffers, checkPassword, checkLogin };

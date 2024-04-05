@@ -8,6 +8,8 @@ export const MAX_IMAGES_COUNT = 6;
 
 export const MAX_REVIEWS_COUNT = 10;
 
+export const MIN_LENGTH_PASSWORD = 2;
+
 export enum PlacesOption {
   Popular = 'Popular',
   Price_to_high = 'Price: low to high',
@@ -147,3 +149,7 @@ export enum StatusLoading {
   Failed,
 }
 
+export enum ErrorMessages {
+  Login = 'Enter a valid email address',
+  Password = 'The password must contain at least one letter and one number',
+}

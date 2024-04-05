@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../const';
+import { AppRoute, ErrorMessages } from '../const';
 import { Helmet } from 'react-helmet-async';
 import { FormEvent, useState } from 'react';
 import { useAppDispatch } from '../hooks';
 import { loginAction } from '../store/api-actions';
+import { checkLogin, checkPassword } from '../utils';
+import { toast } from 'react-toastify';
 
 function LoginPage () {
   const [login, setLogin] = useState<string>('');
@@ -13,7 +15,19 @@ function LoginPage () {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if(login !== '' && password !== '') {
+
+    const checkPasswordValue = checkPassword(password);
+    const checkLoginValue = checkLogin(login);
+
+    if(!checkPasswordValue){
+      toast.warn(ErrorMessages.Password);
+    }
+
+    if(!checkLoginValue){
+      toast.warn(ErrorMessages.Login);
+    }
+
+    if(checkPasswordValue && checkLoginValue) {
       dispatch(loginAction({
         login: login,
         password: password
