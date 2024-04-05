@@ -1,9 +1,10 @@
-import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
-import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, RatingValues, StatusLoading } from '../../const';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, StatusLoading } from '../../const';
 import { TReviewForm } from '../../types/reviews';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { selectStatusLoading } from '../../store/comments-process/comments-process.selectors';
+import RatingForm from '../rating-form/rating-form';
 
 type ReviewFormProps = {
   id: string | undefined;
@@ -25,6 +26,13 @@ function ReviewForm ({id}: ReviewFormProps) {
     }
   };
 
+  const handleRatingChange = ({target}: ChangeEvent<HTMLInputElement>) => {
+    setFormValues({
+      ...formValues,
+      rating: Number(target.value)
+    });
+  };
+
   return (
     <form
       className="reviews__form form"
@@ -33,31 +41,11 @@ function ReviewForm ({id}: ReviewFormProps) {
       onSubmit={handleSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating">
-        {RatingValues.map((value) => (
-          <Fragment key={value}>
-            <input
-              className="form__rating-input visually-hidden"
-              name="rating"
-              value={value}
-              id={`${value}-stars`}
-              type="radio"
-              onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-                setFormValues({
-                  ...formValues,
-                  rating: Number(target.value)
-                });
-              }}
-              checked={Number(formValues.rating) === value}
-              disabled={isLoading}
-            />
-            <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
-              <svg className="form__star-image" width={37} height={33}>
-                <use xlinkHref="#icon-star"></use>
-              </svg>
-            </label>
-          </Fragment>))}
-      </div>
+      <RatingForm
+        isLoading={isLoading}
+        rating={formValues.rating}
+        handleRatingChange={handleRatingChange}
+      />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
