@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { memo } from 'react';
 
 type LogoProps = {
   linkClassName: string;
@@ -20,4 +21,6 @@ function Logo ({linkClassName, isHeader} : LogoProps) : JSX.Element {
   );
 }
 
-export default Logo;
+const MemorizedLogo = memo(Logo);
+
+export default MemorizedLogo;

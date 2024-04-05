@@ -1,5 +1,6 @@
-import Logo from '../ui/logo';
+import { memo } from 'react';
 import Navigation from './navigation/navigation';
+import MemorizedLogo from '../ui/logo';
 
 type HeaderProps = {
   linkClassName: string;
@@ -12,7 +13,7 @@ function Header ({linkClassName, shouldRenderUser} : HeaderProps) : JSX.Element 
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo linkClassName={linkClassName} isHeader/>
+            <MemorizedLogo linkClassName={linkClassName} isHeader/>
           </div>
           {shouldRenderUser && <Navigation />}
         </div>
@@ -21,4 +22,6 @@ function Header ({linkClassName, shouldRenderUser} : HeaderProps) : JSX.Element 
   );
 }
 
-export default Header;
+const MemorizedHeader = memo(Header);
+
+export default MemorizedHeader;

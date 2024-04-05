@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type PremiumProps = {
   isOfferCard: boolean;
 }
@@ -10,4 +12,6 @@ function Premium ({isOfferCard} : PremiumProps) : JSX.Element {
   );
 }
 
-export default Premium;
+const MemorizedPremium = memo(Premium);
+
+export default MemorizedPremium;

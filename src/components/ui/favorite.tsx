@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { postFavoriteStatus } from '../../store/api-actions';
 import { changeFavoriteInOffer } from '../../store/offer-process/offer-process.slice';
@@ -36,4 +37,6 @@ function Favorite ({isOfferCard, isFavorite, id} : FavoriteProps) : JSX.Element 
   );
 }
 
-export default Favorite;
+const MemorizedFavorite = memo(Favorite);
+
+export default MemorizedFavorite;

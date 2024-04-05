@@ -5,9 +5,6 @@ import { getShownNearOffers, getStrStartWithCapitalLetters } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
 import Review from '../components/review/review';
-import Premium from '../components/ui/premium';
-import Favorite from '../components/ui/favorite';
-import Rating from '../components/ui/rating';
 import OfferItem from '../components/offer/offer-item';
 import Map from '../components/map/map';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -17,6 +14,9 @@ import Loader from '../components/loader/loader';
 import { selectCurrentOffer, selectNearOffers } from '../store/offer-process/offer-process.selectors';
 import { selectAuthorizationStatus } from '../store/user-process/user-process.selectors';
 import { selectStatusLoading } from '../store/offers-process/offers-process.selectors';
+import MemorizedFavorite from '../components/ui/favorite';
+import MemorizedPremium from '../components/ui/premium';
+import MemorizedRating from '../components/ui/rating';
 
 function OfferPage () {
   const nearOffers = useAppSelector(selectNearOffers);
@@ -65,16 +65,16 @@ function OfferPage () {
         <Gallery images={images}/>
         <div className="offer__container container">
           <div className="offer__wrapper">
-            {isPremium && <Premium isOfferCard={false}/>}
+            {isPremium && <MemorizedPremium isOfferCard={false}/>}
             <div className="offer__name-wrapper">
               <h1 className="offer__name">
                 {title}
               </h1>
               {authorizationStatus === AuthorizationStatus.Auth ?
-                <Favorite isOfferCard={false} isFavorite={isFavorite} id={currentId}/> : ''}
+                <MemorizedFavorite isOfferCard={false} isFavorite={isFavorite} id={currentId}/> : ''}
             </div>
             <div className="offer__rating rating">
-              <Rating isOffer rating={rating}/>
+              <MemorizedRating isOffer rating={rating}/>
               <span className="offer__rating-value rating__value">{rating}</span>
             </div>
             <ul className="offer__features">
