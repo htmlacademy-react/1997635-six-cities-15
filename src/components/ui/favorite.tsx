@@ -1,5 +1,7 @@
 import { useAppDispatch } from '../../hooks';
-import { fetchToggleFavorite } from '../../store/api-actions';
+import { postFavoriteStatus } from '../../store/api-actions';
+import { changeFavoriteInOffer } from '../../store/offer-process/offer-process.slice';
+import { changeFavoriteInOffers } from '../../store/offers-process/offers-process.slice';
 
 type FavoriteProps = {
   isOfferCard: boolean;
@@ -14,7 +16,10 @@ function Favorite ({isOfferCard, isFavorite, id} : FavoriteProps) : JSX.Element 
 
   const handleClick = () => {
     if(id) {
-      dispatch(fetchToggleFavorite({id, isFavorite: !isFavorite}));
+      const setting = {id, isFavorite: !isFavorite};
+      dispatch(postFavoriteStatus(setting));
+      dispatch(changeFavoriteInOffers(setting));
+      dispatch(changeFavoriteInOffer(setting));
     }
   };
 

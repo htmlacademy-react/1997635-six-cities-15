@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { selectAuthorizationStatus, selectFavorites } from '../../../store/selectors/selectors';
 import { logoutAction } from '../../../store/api-actions';
 import { MouseEvent } from 'react';
 import { getUserEmail } from '../../../services/token';
+import { selectAuthorizationStatus } from '../../../store/user-process/user-process.selectors';
+import { selectFavorites } from '../../../store/favorites-process/favorites-process.selectors';
 
 function Navigation () : JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);

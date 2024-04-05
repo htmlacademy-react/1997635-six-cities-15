@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { selectAuthorizationStatus } from '../../store/selectors/selectors';
+import { selectAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 
 type PrivateRouteProps = {
   isReverse?: boolean;

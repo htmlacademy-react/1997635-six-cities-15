@@ -2,7 +2,7 @@ import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
 import { MIN_LENGTH_COMMENT, RatingValues } from '../../const';
 import { TReviewForm } from '../../types/reviews';
 import { useAppDispatch } from '../../hooks';
-import { fetchReviewAction } from '../../store/api-actions';
+import { postReviewAction } from '../../store/api-actions';
 
 type ReviewFormProps = {
   id: string | undefined;
@@ -16,7 +16,7 @@ function ReviewForm ({id}: ReviewFormProps) {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if(id) {
-      dispatch(fetchReviewAction({id, reviewValues: formValues}));
+      dispatch(postReviewAction({id, reviewValues: formValues})).then(()=> setFormValues({rating: null, comment: ''}));
     }
   };
 
@@ -43,6 +43,7 @@ function ReviewForm ({id}: ReviewFormProps) {
                   rating: Number(target.value)
                 });
               }}
+              checked={Number(formValues.rating) === value}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
               <svg className="form__star-image" width={37} height={33}>
@@ -56,6 +57,7 @@ function ReviewForm ({id}: ReviewFormProps) {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        value={formValues.comment}
         onChange={({target}: ChangeEvent<HTMLTextAreaElement>) => {
           setFormValues({
             ...formValues,

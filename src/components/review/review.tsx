@@ -2,7 +2,8 @@ import ReviewForm from './review-form';
 import ReviewList from './review-list';
 import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { selectAuthorizationStatus, selectReviewsList } from '../../store/selectors/selectors';
+import { selectAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { selectReviewsList } from '../../store/comments-process/comments-process.selectors';
 
 type ReviewProps = {
   id: string | undefined;

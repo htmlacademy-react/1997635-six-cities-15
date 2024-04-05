@@ -4,7 +4,8 @@ import { Locations } from '../const';
 import FavoritesLocation from '../components/favorites-location/favorites-location';
 import FavoriteEmpty from '../components/favorites-location/favorite-empty';
 import { useAppSelector } from '../hooks';
-import { selectFavorites } from '../store/selectors/selectors';
+import { selectFavorites } from '../store/favorites-process/favorites-process.selectors';
+
 
 function FavoritesPage () : JSX.Element {
 
