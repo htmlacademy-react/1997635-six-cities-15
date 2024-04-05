@@ -1,5 +1,6 @@
 import { AppRoute, Locations, PlacesOption } from './const';
 import { TOffer } from './types/offers';
+import { TReview } from './types/reviews';
 
 const getStrStartWithCapitalLetters = (data: string) => data.replace(data[0], data[0].toUpperCase());
 
@@ -41,4 +42,19 @@ const getLayoutState = (pathname: AppRoute, favorites: TOffer[]) => {
   return {rootClassName, linkClassName, shouldRenderUser, shouldRenderFooter};
 };
 
-export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState };
+const getSortReviews = (reviews: TReview[]) => Array.from(reviews).sort((reviewA: TReview, reviewB: TReview) => {
+  const dateA = Date.parse(reviewA.date);
+  const dateB = Date.parse(reviewB.date);
+  return dateB - dateA;
+});
+
+const getShownReviews = (reviews: TReview[]) => {
+  const sortReviews = getSortReviews(reviews);
+  const lastIndex = sortReviews.length;
+  if (lastIndex < 10){
+    return sortReviews;
+  }
+  return sortReviews.slice(0, 10);
+};
+
+export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews };

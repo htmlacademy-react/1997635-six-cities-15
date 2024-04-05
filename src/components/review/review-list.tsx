@@ -1,5 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import { selectReviewsList } from '../../store/comments-process/comments-process.selectors';
+import { getShownReviews } from '../../utils';
 import ReviewItem from './review-item';
 
 function ReviewList (): JSX.Element {
@@ -7,7 +8,7 @@ function ReviewList (): JSX.Element {
 
   return (
     <ul className="reviews__list">
-      {reviews.map((review) =>
+      {getShownReviews(reviews).map((review) =>
         <ReviewItem review={review} key={review.id}/>)}
     </ul>
   );

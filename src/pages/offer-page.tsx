@@ -21,7 +21,6 @@ import { selectStatusLoading } from '../store/offers-process/offers-process.sele
 function OfferPage () {
   const nearOffers = useAppSelector(selectNearOffers);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-
   const statusLoading = useAppSelector(selectStatusLoading);
   const currentOffer = useAppSelector(selectCurrentOffer);
   const {id: currentId} = useParams();
