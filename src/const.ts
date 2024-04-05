@@ -1,5 +1,11 @@
 export const MIN_LENGTH_COMMENT = 50;
 
+export const MAX_NEAR_OFFERS_COUNT = 3;
+
+export const MAX_IMAGES_COUNT = 6;
+
+export const MAX_REVIEWS_COUNT = 10;
+
 export enum PlacesOption {
   Popular = 'Popular',
   Price_to_high = 'Price: low to high',

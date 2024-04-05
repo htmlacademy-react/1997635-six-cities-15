@@ -1,7 +1,7 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus, StatusLoading } from '../const';
-import { getStrStartWithCapitalLetters } from '../utils';
+import { getShownNearOffers, getStrStartWithCapitalLetters } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
 import Review from '../components/review/review';
@@ -52,7 +52,9 @@ function OfferPage () {
   }
   const {title, type, price, isFavorite, isPremium, rating, images, bedrooms, maxAdults, host, description} = currentOffer;
 
-  const nearOffersPlusCurrent = [...nearOffers, currentOffer];
+  const shownNearOffers = getShownNearOffers(nearOffers);
+
+  const nearOffersPlusCurrent = [...shownNearOffers, currentOffer];
 
   return (
     <main className="page__main page__main--offer">

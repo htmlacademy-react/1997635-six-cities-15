@@ -1,4 +1,4 @@
-import { AppRoute, Locations, PlacesOption } from './const';
+import { AppRoute, Locations, MAX_IMAGES_COUNT, MAX_NEAR_OFFERS_COUNT, MAX_REVIEWS_COUNT, PlacesOption } from './const';
 import { TOffer } from './types/offers';
 import { TReview } from './types/reviews';
 
@@ -51,17 +51,24 @@ const getSortReviews = (reviews: TReview[]) => Array.from(reviews).sort((reviewA
 const getShownReviews = (reviews: TReview[]) => {
   const sortReviews = getSortReviews(reviews);
   const lastIndex = sortReviews.length;
-  if (lastIndex < 10){
+  if (lastIndex < MAX_REVIEWS_COUNT){
     return sortReviews;
   }
-  return sortReviews.slice(0, 10);
+  return sortReviews.slice(0, MAX_REVIEWS_COUNT);
 };
 
 const getImagesFromGallery = (images: [string]) => {
-  if(images.length <= 6) {
+  if(images.length <= MAX_IMAGES_COUNT) {
     return images;
   }
-  return images.slice(0, 6);
+  return images.slice(0, MAX_IMAGES_COUNT);
 };
 
-export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews, getImagesFromGallery };
+const getShownNearOffers = (nearOffers: TOffer[]) => {
+  if(nearOffers.length <= MAX_NEAR_OFFERS_COUNT) {
+    return nearOffers;
+  }
+  return nearOffers.slice(0, MAX_NEAR_OFFERS_COUNT);
+};
+
+export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews, getImagesFromGallery, getShownNearOffers };
