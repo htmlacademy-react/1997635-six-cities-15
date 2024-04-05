@@ -75,4 +75,13 @@ const checkPassword = (password: string) => password.length >= MIN_LENGTH_PASSWO
 
 const checkLogin = (login: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(login);
 
-export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews, getImagesFromGallery, getShownNearOffers, checkPassword, checkLogin };
+const getRandomCity = () =>{
+  const locations = Object.values(Locations);
+  let randomIndex = locations.length;
+  while (randomIndex > locations.length - 1){
+    randomIndex = Math.floor(Math.random() * 10);
+  }
+  return locations[randomIndex];
+};
+
+export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews, getImagesFromGallery, getShownNearOffers, checkPassword, checkLogin, getRandomCity };

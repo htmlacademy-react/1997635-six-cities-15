@@ -4,14 +4,19 @@ import { Helmet } from 'react-helmet-async';
 import { FormEvent, useState } from 'react';
 import { useAppDispatch } from '../hooks';
 import { loginAction } from '../store/api-actions';
-import { checkLogin, checkPassword } from '../utils';
+import { checkLogin, checkPassword, getRandomCity } from '../utils';
 import { toast } from 'react-toastify';
+import { changeCity } from '../store/offers-process/offers-process.slice';
 
 function LoginPage () {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const dispatch = useAppDispatch();
+
+  const currentCity = getRandomCity();
+
+  dispatch(changeCity(currentCity));
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -82,7 +87,7 @@ function LoginPage () {
         <section className="locations locations--login locations--current">
           <div className="locations__item">
             <Link className="locations__item-link" to={AppRoute.Main}>
-              <span>Amsterdam</span>
+              <span>{currentCity}</span>
             </Link>
           </div>
         </section>
