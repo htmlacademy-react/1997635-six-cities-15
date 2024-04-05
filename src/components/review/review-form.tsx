@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
-import { MIN_LENGTH_COMMENT, RatingValues } from '../../const';
+import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, RatingValues } from '../../const';
 import { TReviewForm } from '../../types/reviews';
 import { useAppDispatch } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
@@ -64,6 +64,7 @@ function ReviewForm ({id}: ReviewFormProps) {
             comment: target.value
           });
         }}
+        maxLength={MAX_LENGTH_COMMENT}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

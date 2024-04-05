@@ -1,5 +1,7 @@
 export const MIN_LENGTH_COMMENT = 50;
 
+export const MAX_LENGTH_COMMENT = 300;
+
 export const MAX_NEAR_OFFERS_COUNT = 3;
 
 export const MAX_IMAGES_COUNT = 6;
