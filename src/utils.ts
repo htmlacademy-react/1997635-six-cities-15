@@ -57,4 +57,11 @@ const getShownReviews = (reviews: TReview[]) => {
   return sortReviews.slice(0, 10);
 };
 
-export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews };
+const getImagesFromGallery = (images: [string]) => {
+  if(images.length <= 6) {
+    return images;
+  }
+  return images.slice(0, 6);
+};
+
+export { getStrStartWithCapitalLetters, getSortOffersList, getCurrentOffersList, getLayoutState, getShownReviews, getImagesFromGallery };

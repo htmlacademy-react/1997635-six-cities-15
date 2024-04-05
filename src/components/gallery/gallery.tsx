@@ -1,3 +1,4 @@
+import { getImagesFromGallery } from '../../utils';
 import GalleryItem from './gallery-item';
 
 type GalleryProps = {
@@ -8,7 +9,7 @@ function Gallery ({images}: GalleryProps) : JSX.Element {
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
-        {images.map((image) => <GalleryItem key={image} src={image}/>)}
+        {getImagesFromGallery(images).map((image) => <GalleryItem key={image} src={image}/>)}
       </div>
     </div>
   );
