@@ -1,6 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus, StatusLoading } from '../const';
+import { AppRoute, StatusLoading } from '../const';
 import { getShownNearOffers, getStrStartWithCapitalLetters } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
@@ -12,7 +12,6 @@ import { fetchNearOffersAction, fetchOfferByIdAction, fetchReviewsListAction } f
 import { useEffect } from 'react';
 import Loader from '../components/loader/loader';
 import { selectCurrentOffer, selectNearOffers } from '../store/offer-process/offer-process.selectors';
-import { selectAuthorizationStatus } from '../store/user-process/user-process.selectors';
 import { selectStatusLoading } from '../store/offers-process/offers-process.selectors';
 import MemorizedFavorite from '../components/ui/favorite';
 import MemorizedPremium from '../components/ui/premium';
@@ -20,7 +19,6 @@ import MemorizedRating from '../components/ui/rating';
 
 function OfferPage () {
   const nearOffers = useAppSelector(selectNearOffers);
-  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const statusLoading = useAppSelector(selectStatusLoading);
   const currentOffer = useAppSelector(selectCurrentOffer);
   const {id: currentId} = useParams();
@@ -70,8 +68,7 @@ function OfferPage () {
               <h1 className="offer__name">
                 {title}
               </h1>
-              {authorizationStatus === AuthorizationStatus.Auth ?
-                <MemorizedFavorite isOfferCard={false} isFavorite={isFavorite} id={currentId}/> : ''}
+              <MemorizedFavorite isOfferCard={false} isFavorite={isFavorite} id={currentId}/>
             </div>
             <div className="offer__rating rating">
               <MemorizedRating isOffer rating={rating}/>
