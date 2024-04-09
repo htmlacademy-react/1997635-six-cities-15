@@ -18,11 +18,15 @@ function LoginForm () {
     const checkLoginValue = checkLogin(login);
 
     if(!checkPasswordValue){
-      toast.warn(ErrorMessages.Password);
+      toast.warn(ErrorMessages.Password, {
+        position: 'bottom-right'
+      });
     }
 
     if(!checkLoginValue){
-      toast.warn(ErrorMessages.Login);
+      toast.warn(ErrorMessages.Login, {
+        position: 'bottom-right'
+      });
     }
 
     if(checkPasswordValue && checkLoginValue) {

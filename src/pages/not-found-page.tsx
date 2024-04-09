@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 
 function NotFoundPage () {
   return (
-    <main className="page__main page__main--favorites page__main--favorites-empty">
+    <main className="page__main page__main--favorites .page__main--offer page__main--favorites-empty">
       <Helmet>
         <title>6 cities: not found</title>
       </Helmet>

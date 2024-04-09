@@ -1,20 +1,35 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { logoutAction } from '../../../store/api-actions';
-import { MouseEvent } from 'react';
+import { fetchFavoritesAction, logoutAction } from '../../../store/api-actions';
+import { MouseEvent, useEffect } from 'react';
 import { getUserEmail } from '../../../services/token';
-import { selectAuthorizationStatus } from '../../../store/user-process/user-process.selectors';
+import { selectAuthorizationStatus, selectUserEmail } from '../../../store/user-process/user-process.selectors';
 import { selectFavorites } from '../../../store/favorites-process/favorites-process.selectors';
 
 function Navigation () : JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const userEmail = getUserEmail();
+
+  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if(isAuth){
+      dispatch(fetchFavoritesAction());
+    }
+  }, [isAuth, dispatch]);
+
+  let userEmail = useAppSelector(selectUserEmail);
+
+  if (!userEmail) {
+    userEmail = getUserEmail();
+  }
+
   const favorites = useAppSelector(selectFavorites);
 
   const favoritesCount = favorites.length;
 
-  const dispatch = useAppDispatch();
 
   const handleClick = (evt: MouseEvent<HTMLLIElement>) => {
     evt.preventDefault();
@@ -24,9 +39,9 @@ function Navigation () : JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
-        <li className="header__nav-item user">
+        <li className={`header__nav-item${isAuth ? ' user' : ''}`}>
           <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-            {authorizationStatus === AuthorizationStatus.Auth ? (
+            {isAuth ? (
               <>
                 <div className="header__avatar-wrapper user__avatar-wrapper">
                 </div>
@@ -37,7 +52,7 @@ function Navigation () : JSX.Element {
 
           </Link>
         </li>
-        {authorizationStatus === AuthorizationStatus.Auth && (
+        {isAuth && (
           <li className="header__nav-item" onClick={handleClick}>
             <a className="header__nav-link" href="#">
               <span className="header__signout">Sign out</span>

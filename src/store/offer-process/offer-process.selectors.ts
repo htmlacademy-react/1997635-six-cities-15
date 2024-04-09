@@ -5,4 +5,6 @@ const selectCurrentOffer = (state: State) => state[NameSpace.Offer].currentOffer
 
 const selectNearOffers = (state: State) => state[NameSpace.Offer].nearOffers;
 
-export {selectCurrentOffer, selectNearOffers};
+const selectStatusLoading = (state: State) => state[NameSpace.Offer].statusLoading;
+
+export {selectCurrentOffer, selectNearOffers, selectStatusLoading};

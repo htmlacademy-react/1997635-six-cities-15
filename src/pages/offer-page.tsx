@@ -1,6 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { AppRoute, StatusLoading } from '../const';
+import { StatusLoading } from '../const';
 import { getShownNearOffers, getStrStartWithCapitalLetters } from '../utils';
 import Gallery from '../components/gallery/gallery';
 import OfferInside from '../components/offer-inside/offer-inside';
@@ -11,17 +11,17 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { fetchNearOffersAction, fetchOfferByIdAction, fetchReviewsListAction } from '../store/api-actions';
 import { useEffect } from 'react';
 import Loader from '../components/loader/loader';
-import { selectCurrentOffer, selectNearOffers } from '../store/offer-process/offer-process.selectors';
-import { selectStatusLoading } from '../store/offers-process/offers-process.selectors';
+import { selectCurrentOffer, selectNearOffers, selectStatusLoading } from '../store/offer-process/offer-process.selectors';
 import MemorizedFavorite from '../components/ui/favorite';
 import MemorizedPremium from '../components/ui/premium';
 import MemorizedRating from '../components/ui/rating';
 
 function OfferPage () {
+  const {id: currentId} = useParams();
+
+  const currentOffer = useAppSelector(selectCurrentOffer);
   const nearOffers = useAppSelector(selectNearOffers);
   const statusLoading = useAppSelector(selectStatusLoading);
-  const currentOffer = useAppSelector(selectCurrentOffer);
-  const {id: currentId} = useParams();
 
   const dispatch = useAppDispatch();
 
@@ -37,17 +37,16 @@ function OfferPage () {
     }
   }, [dispatch, currentId, currentOffer]);
 
-
-  if (!currentOffer) {
-    return <Navigate to={AppRoute.Main}/>;
-  }
-
-
   if(statusLoading === StatusLoading.Loading) {
     return (
       <Loader />
     );
   }
+
+  if (!currentOffer) {
+    return <Navigate to='404'/>;
+  }
+
   const {title, type, price, isFavorite, isPremium, rating, images, bedrooms, maxAdults, host, description} = currentOffer;
 
   const shownNearOffers = getShownNearOffers(nearOffers);
