@@ -33,19 +33,6 @@ export const enum HousingTypes {
   hotel = 'hotel'
 }
 
-export const OfferInsideItems = [
-  'Wi-Fi',
-  'Washing machine',
-  'Towels',
-  'Heating',
-  'Coffee machine',
-  'Baby seat',
-  'Kitchen',
-  'Dishwasher',
-  'Cabel TV',
-  'Fridge'
-] as const;
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -60,7 +47,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const RatingValues = [5, 4, 3, 2, 1] as const;
+export enum RatingValues {
+  Perfect = '5',
+  Good = '4',
+  Normal = '3',
+  Bad = '2',
+  'Not Bad' = '1'
+}
 
 export const URL_MARKER_DEFAULT =
   '/img/pin.svg';

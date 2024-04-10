@@ -41,90 +41,92 @@ function OfferPage () {
     return (
       <Loader />
     );
+  } else {
+    if (!currentOffer) {
+      return <Navigate to='404'/>;
+    }
   }
 
-  if (!currentOffer) {
-    return <Navigate to='404'/>;
-  }
+  if(currentOffer){
+    const {title, type, price, isFavorite, isPremium, rating, images, bedrooms, maxAdults, host, description, goods} = currentOffer;
 
-  const {title, type, price, isFavorite, isPremium, rating, images, bedrooms, maxAdults, host, description} = currentOffer;
+    const shownNearOffers = getShownNearOffers(nearOffers);
 
-  const shownNearOffers = getShownNearOffers(nearOffers);
+    const nearOffersPlusCurrent = [...shownNearOffers, currentOffer];
 
-  const nearOffersPlusCurrent = [...shownNearOffers, currentOffer];
-
-  return (
-    <main className="page__main page__main--offer">
-      <Helmet>
-        <title>6 cities: offer</title>
-      </Helmet>
-      <section className="offer">
-        <Gallery images={images}/>
-        <div className="offer__container container">
-          <div className="offer__wrapper">
-            {isPremium && <MemorizedPremium isOfferCard={false}/>}
-            <div className="offer__name-wrapper">
-              <h1 className="offer__name">
-                {title}
-              </h1>
-              <MemorizedFavorite isOfferCard={false} isFavorite={isFavorite} id={currentId}/>
-            </div>
-            <div className="offer__rating rating">
-              <MemorizedRating isOffer rating={rating}/>
-              <span className="offer__rating-value rating__value">{rating}</span>
-            </div>
-            <ul className="offer__features">
-              <li className="offer__feature offer__feature--entire">
-                {getStrStartWithCapitalLetters(type)}
-              </li>
-              <li className="offer__feature offer__feature--bedrooms">
-                {bedrooms} Bedrooms
-              </li>
-              <li className="offer__feature offer__feature--adults">
-                Max {maxAdults} adults
-              </li>
-            </ul>
-            <div className="offer__price">
-              <b className="offer__price-value">&euro;{price}</b>
-              <span className="offer__price-text">&nbsp;night</span>
-            </div>
-            <OfferInside/>
-            <div className="offer__host">
-              <h2 className="offer__host-title">Meet the host</h2>
-              <div className="offer__host-user user">
-                <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="offer__avatar user__avatar" src={host.avatarUrl} width={74} height={74} alt="Host avatar" />
+    return (
+      <main className="page__main page__main--offer">
+        <Helmet>
+          <title>6 cities: offer</title>
+        </Helmet>
+        <section className="offer">
+          <Gallery images={images}/>
+          <div className="offer__container container">
+            <div className="offer__wrapper">
+              {isPremium && <MemorizedPremium isOfferCard={false}/>}
+              <div className="offer__name-wrapper">
+                <h1 className="offer__name">
+                  {title}
+                </h1>
+                <MemorizedFavorite isOfferCard={false} isFavorite={isFavorite} id={currentId}/>
+              </div>
+              <div className="offer__rating rating">
+                <MemorizedRating isOffer rating={rating}/>
+                <span className="offer__rating-value rating__value">{rating}</span>
+              </div>
+              <ul className="offer__features">
+                <li className="offer__feature offer__feature--entire">
+                  {getStrStartWithCapitalLetters(type)}
+                </li>
+                <li className="offer__feature offer__feature--bedrooms">
+                  {bedrooms} Bedrooms
+                </li>
+                <li className="offer__feature offer__feature--adults">
+                  Max {maxAdults} adults
+                </li>
+              </ul>
+              <div className="offer__price">
+                <b className="offer__price-value">&euro;{price}</b>
+                <span className="offer__price-text">&nbsp;night</span>
+              </div>
+              <OfferInside goods={goods}/>
+              <div className="offer__host">
+                <h2 className="offer__host-title">Meet the host</h2>
+                <div className="offer__host-user user">
+                  <div className={`offer__avatar-wrapper ${host.isPro ? 'offer__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
+                    <img className="offer__avatar user__avatar" src={host.avatarUrl} width={74} height={74} alt="Host avatar" />
+                  </div>
+                  <span className="offer__user-name">
+                    Angelina
+                  </span>
+                  {host.isPro && <span className="offer__user-status">Pro</span>}
                 </div>
-                <span className="offer__user-name">
-                  Angelina
-                </span>
-                {host.isPro && <span className="offer__user-status">Pro</span>}
+                <div className="offer__description">
+                  <p className="offer__text">
+                    {description}
+                  </p>
+                </div>
               </div>
-              <div className="offer__description">
-                <p className="offer__text">
-                  {description}
-                </p>
-              </div>
+              <Review id={currentId}/>
             </div>
-            <Review id={currentId}/>
           </div>
-        </div>
-        <Map
-          offers={nearOffersPlusCurrent}
-          activeOffer={currentOffer}
-          isOfferPage
-        />
-      </section>
-      <div className="container">
-        <section className="near-places places">
-          <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <div className="near-places__list places__list">
-            {nearOffers.map((offer) => <OfferItem key={offer.id} offer={offer}/>)}
-          </div>
+          <Map
+            offers={nearOffersPlusCurrent}
+            activeOffer={currentOffer}
+            isOfferPage
+          />
         </section>
-      </div>
-    </main>
-  );
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              {shownNearOffers.map((offer) => <OfferItem key={offer.id} offer={offer}/>)}
+            </div>
+          </section>
+        </div>
+      </main>
+    );
+  }
 }
 
 export default OfferPage;

@@ -11,10 +11,11 @@ type RatingFormProps = {
 function RatingForm ({isLoading, rating, handleRatingChange } : RatingFormProps) {
   return (
     <div className="reviews__rating-form form__rating">
-      {RatingValues.map((value) => (
+      {(Object.keys(RatingValues) as Array<keyof typeof RatingValues>).map((value) => (
         <RatingItem
           key={value}
-          value={value}
+          value={Number(RatingValues[value])}
+          label={value}
           isLoading={isLoading}
           rating={rating}
           handleRatingChange={handleRatingChange}

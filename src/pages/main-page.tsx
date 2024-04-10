@@ -68,7 +68,7 @@ function MainPage(): JSX.Element {
                       <use xlinkHref="#icon-arrow-select"></use>
                     </svg>
                   </span>
-                  {showSort && <Sort handleSortActive={handleSortActive} currentSortType={sortType}/>}
+                  <Sort handleSortActive={handleSortActive} currentSortType={sortType} showSort={showSort}/>
                 </form>
                 <Offers
                   offers={sortOffers}

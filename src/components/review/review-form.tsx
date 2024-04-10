@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent, useCallback } from 'react';
+import { useState, ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
 import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, StatusLoading } from '../../const';
 import { TReviewForm } from '../../types/reviews';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -22,9 +22,15 @@ function ReviewForm ({id}: ReviewFormProps) {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if(id) {
-      dispatch(postReviewAction({id, reviewValues: formValues})).then(()=> setFormValues({rating: null, comment: ''}));
+      dispatch(postReviewAction({id, reviewValues: formValues}));
     }
   };
+
+  useEffect(() => {
+    if(statusLoading === StatusLoading.Success) {
+      setFormValues({rating: null, comment: ''});
+    }
+  }, [statusLoading]);
 
   const handleRatingChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
     setFormValues({

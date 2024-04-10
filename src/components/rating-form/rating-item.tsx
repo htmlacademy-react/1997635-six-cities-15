@@ -2,12 +2,13 @@ import { ChangeEvent, Fragment } from 'react';
 
 type RatingItemProps = {
   value: number;
+  label: string;
   isLoading: boolean;
   rating: number | null;
   handleRatingChange: ({target}: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function RatingItem ({value, isLoading, rating, handleRatingChange } : RatingItemProps) {
+function RatingItem ({value, label, isLoading, rating, handleRatingChange } : RatingItemProps) {
   return (
     <Fragment key={value}>
       <input
@@ -20,7 +21,7 @@ function RatingItem ({value, isLoading, rating, handleRatingChange } : RatingIte
         checked={Number(rating) === value}
         disabled={isLoading}
       />
-      <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
+      <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={label.toLowerCase()}>
         <svg className="form__star-image" width={37} height={33}>
           <use xlinkHref="#icon-star"></use>
         </svg>
