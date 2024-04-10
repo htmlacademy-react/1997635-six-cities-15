@@ -3,4 +3,6 @@ import { State } from '../../types/state';
 
 const selectAuthorizationStatus = (state: State) => state[NameSpace.User].authorizationStatus;
 
-export {selectAuthorizationStatus};
+const selectUserEmail = (state: State) => state[NameSpace.User].userData?.email;
+
+export {selectAuthorizationStatus, selectUserEmail};

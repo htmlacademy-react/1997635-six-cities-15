@@ -5,6 +5,7 @@ import FavoritesLocation from '../components/favorites-location/favorites-locati
 import FavoriteEmpty from '../components/favorites-location/favorite-empty';
 import { useAppSelector } from '../hooks';
 import { selectFavorites } from '../store/favorites-process/favorites-process.selectors';
+import { useCallback } from 'react';
 
 
 function FavoritesPage () : JSX.Element {
@@ -13,7 +14,7 @@ function FavoritesPage () : JSX.Element {
 
   const isEmptyFavorites = favorites.length === 0;
 
-  const getFavoritesSortList = () => {
+  const getFavoritesSortList = useCallback(() => {
     const favoritesSortList : Partial<Record<Locations, TOffer[]>> = {};
     favorites.forEach((favorite) => {
       if (favorite.city.name in favoritesSortList) {
@@ -23,7 +24,7 @@ function FavoritesPage () : JSX.Element {
       }
     });
     return favoritesSortList;
-  };
+  }, [favorites]);
 
   return (
     <main className={`page__main page__main--favorites${isEmptyFavorites ? ' page__main--favorites-empty' : ''}`}>

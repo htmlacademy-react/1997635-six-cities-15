@@ -7,7 +7,7 @@ import { OfferProcess } from '../../types/offer-process';
 const initialState: OfferProcess = {
   nearOffers: [],
   currentOffer: null,
-  statusLoading: StatusLoading.None
+  statusLoading: StatusLoading.Loading
 };
 
 export const offerProcess = createSlice({

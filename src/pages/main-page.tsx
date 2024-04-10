@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Nullable } from 'vitest';
 import Map from '../components/map/map';
 import Offers from '../components/offer/offers';
 import Sort from '../components/sort/sort';
-import Tabs from '../components/tabs/tabs';
 import type { TOffer } from '../types/offers';
 import OfferEmpty from '../components/offer/offer-empty';
 import { useAppSelector } from '../hooks';
 import { PlacesOption } from '../const';
 import { getCurrentOffersList, getSortOffersList } from '../utils';
 import { selectCity, selectOffers } from '../store/offers-process/offers-process.selectors';
+import MemorizedTabs from '../components/tabs/tabs';
 
 function MainPage(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
@@ -32,30 +32,30 @@ function MainPage(): JSX.Element {
     setSortOffers(getSortOffersList(sortType, currentOffers));
   }, [offers, sortType, currentOffers]);
 
-  const handleOfferHover = (offer?: TOffer) => {
+  const handleOfferHover = useCallback((offer?: TOffer) => {
     setActiveOffer(offer || null);
-  };
+  }, []);
 
-  const handleSortActive = (activeSortType: PlacesOption) => {
+  const handleSortActive = useCallback((activeSortType: PlacesOption) => {
     if(activeSortType !== sortType) {
       setSortType(activeSortType);
     }
     setShowSort(!showSort);
-  };
+  }, [showSort, sortType]);
 
   const isEmptyOffers = currentOffers.length === 0;
 
   return (
     <main className={`page__main page__main--index${isEmptyOffers ? ' page__main--index-empty' : ''}`}>
       <h1 className="visually-hidden">Cities</h1>
-      <Tabs />
+      <MemorizedTabs />
       <div className="cities">
         <div className={`cities__places-container container${isEmptyOffers ? ' cities__places-container--empty' : ''}`}>
           {!isEmptyOffers ?
             <>
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{currentOffers.length} place{currentOffers.length !== 1 ? 's ' : ''} to stay in {currentCity}</b>
+                <b className="places__found">{currentOffers.length} place{currentOffers.length !== 1 ? 's' : ''} to stay in {currentCity}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by </span>
                   <span
@@ -68,7 +68,7 @@ function MainPage(): JSX.Element {
                       <use xlinkHref="#icon-arrow-select"></use>
                     </svg>
                   </span>
-                  {showSort && <Sort handleSortActive={handleSortActive} currentSortType={sortType}/>}
+                  <Sort handleSortActive={handleSortActive} currentSortType={sortType} showSort={showSort}/>
                 </form>
                 <Offers
                   offers={sortOffers}

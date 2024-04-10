@@ -1,5 +1,5 @@
 import type { TReview } from '../../types/reviews';
-import Rating from '../ui/rating';
+import MemorizedRating from '../ui/rating';
 
 type ReviewItemProps = {
   review: TReview;
@@ -17,7 +17,7 @@ function ReviewItem ({review}: ReviewItemProps): JSX.Element {
         <span className="reviews__user-name">{user.name}</span>
       </div>
       <div className="reviews__info">
-        <Rating rating={rating}/>
+        <MemorizedRating rating={rating}/>
         <p className="reviews__text">
           {comment}
         </p>

@@ -18,7 +18,9 @@ export const offersProcess = createSlice({
     },
     changeFavoriteInOffers: (state, action: PayloadAction<{id: string; isFavorite: boolean}>) => {
       const findIndex = state.offers.findIndex((offer) => offer.id === action.payload.id);
-      state.offers[findIndex].isFavorite = action.payload.isFavorite;
+      if(findIndex >= 0) {
+        state.offers[findIndex].isFavorite = action.payload.isFavorite;
+      }
     }
   },
   extraReducers(builder) {

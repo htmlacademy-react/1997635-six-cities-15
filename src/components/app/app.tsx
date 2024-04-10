@@ -58,11 +58,11 @@ function App(): JSX.Element {
                 element={<OfferPage />}
               />
             </Route>
+            <Route
+              path='*'
+              element={<NotFoundPage/>}
+            />
           </Route>
-          <Route
-            path='*'
-            element={<NotFoundPage/>}
-          />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

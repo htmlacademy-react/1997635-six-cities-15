@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type RatingProps = {
   isOfferCard?: boolean;
   rating: number;
@@ -26,4 +28,6 @@ function Rating ({isOfferCard, isOffer, rating} : RatingProps) : JSX.Element {
   );
 }
 
-export default Rating;
+const MemorizedRating = memo(Rating);
+
+export default MemorizedRating;

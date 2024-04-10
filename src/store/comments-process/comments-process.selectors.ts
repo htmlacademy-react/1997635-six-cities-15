@@ -3,5 +3,7 @@ import { NameSpace } from '../../const';
 
 const selectReviewsList = (state: State) => state[NameSpace.Comments].reviewsList;
 
-export {selectReviewsList};
+const selectStatusLoading = (state: State) => state[NameSpace.Comments].statusLoading;
+
+export {selectReviewsList, selectStatusLoading};
 

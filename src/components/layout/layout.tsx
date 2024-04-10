@@ -1,10 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import Header from './header';
-import Footer from './footer';
 import { useAppSelector } from '../../hooks';
 import { getLayoutState } from '../../utils';
 import { selectFavorites } from '../../store/favorites-process/favorites-process.selectors';
+import MemorizedFooter from './footer';
+import MemorizedHeader from './header';
 
 function Layout () : JSX.Element {
   const {pathname} = useLocation();
@@ -13,12 +13,12 @@ function Layout () : JSX.Element {
 
   return (
     <div className={`page${rootClassName}`}>
-      <Header
+      <MemorizedHeader
         linkClassName={linkClassName}
         shouldRenderUser={shouldRenderUser}
       />
       <Outlet />
-      {shouldRenderFooter && <Footer/>}
+      {shouldRenderFooter && <MemorizedFooter/>}
     </div>
   );
 }

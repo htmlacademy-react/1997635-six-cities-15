@@ -26,9 +26,15 @@ export const commentsProcess = createSlice({
       .addCase(fetchReviewsListAction.rejected, (state) => {
         state.statusLoading = StatusLoading.Failed;
       })
+      .addCase(postReviewAction.pending, (state) => {
+        state.statusLoading = StatusLoading.Loading;
+      })
       .addCase(postReviewAction.fulfilled, (state, action) => {
         state.statusLoading = StatusLoading.Success;
         state.reviewsList.push(action.payload);
+      })
+      .addCase(postReviewAction.rejected, (state) => {
+        state.statusLoading = StatusLoading.Failed;
       });
   }
 });

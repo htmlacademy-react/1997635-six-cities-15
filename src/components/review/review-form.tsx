@@ -1,8 +1,10 @@
-import { useState, ChangeEvent, Fragment, FormEvent } from 'react';
-import { MIN_LENGTH_COMMENT, RatingValues } from '../../const';
+import { useState, ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
+import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, StatusLoading } from '../../const';
 import { TReviewForm } from '../../types/reviews';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
+import { selectStatusLoading } from '../../store/comments-process/comments-process.selectors';
+import RatingForm from '../rating-form/rating-form';
 
 type ReviewFormProps = {
   id: string | undefined;
@@ -11,14 +13,31 @@ type ReviewFormProps = {
 function ReviewForm ({id}: ReviewFormProps) {
   const [formValues, setFormValues] = useState<TReviewForm>({rating: null, comment: ''});
 
+  const statusLoading = useAppSelector(selectStatusLoading);
+
+  const isLoading = statusLoading === StatusLoading.Loading;
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if(id) {
-      dispatch(postReviewAction({id, reviewValues: formValues})).then(()=> setFormValues({rating: null, comment: ''}));
+      dispatch(postReviewAction({id, reviewValues: formValues}));
     }
   };
+
+  useEffect(() => {
+    if(statusLoading === StatusLoading.Success) {
+      setFormValues({rating: null, comment: ''});
+    }
+  }, [statusLoading]);
+
+  const handleRatingChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
+    setFormValues({
+      ...formValues,
+      rating: Number(target.value)
+    });
+  }, [formValues]);
 
   return (
     <form
@@ -28,30 +47,11 @@ function ReviewForm ({id}: ReviewFormProps) {
       onSubmit={handleSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating">
-        {RatingValues.map((value) => (
-          <Fragment key={value}>
-            <input
-              className="form__rating-input visually-hidden"
-              name="rating"
-              value={value}
-              id={`${value}-stars`}
-              type="radio"
-              onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-                setFormValues({
-                  ...formValues,
-                  rating: Number(target.value)
-                });
-              }}
-              checked={Number(formValues.rating) === value}
-            />
-            <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
-              <svg className="form__star-image" width={37} height={33}>
-                <use xlinkHref="#icon-star"></use>
-              </svg>
-            </label>
-          </Fragment>))}
-      </div>
+      <RatingForm
+        isLoading={isLoading}
+        rating={formValues.rating}
+        handleRatingChange={handleRatingChange}
+      />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
@@ -64,12 +64,14 @@ function ReviewForm ({id}: ReviewFormProps) {
             comment: target.value
           });
         }}
+        maxLength={MAX_LENGTH_COMMENT}
+        disabled={isLoading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(formValues.rating && formValues.comment.length >= MIN_LENGTH_COMMENT)}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isLoading || !(formValues.rating && formValues.comment.length >= MIN_LENGTH_COMMENT)}>Submit</button>
       </div>
     </form>
   );

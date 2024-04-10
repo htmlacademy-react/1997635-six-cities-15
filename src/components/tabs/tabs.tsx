@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Locations } from '../../const';
 import TabItem from './tab-item';
 
@@ -14,5 +15,6 @@ function Tabs () {
     </div>
   );
 }
+const MemorizedTabs = memo(Tabs);
 
-export default Tabs;
+export default MemorizedTabs;

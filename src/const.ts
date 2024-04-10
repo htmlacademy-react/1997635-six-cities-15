@@ -1,5 +1,15 @@
 export const MIN_LENGTH_COMMENT = 50;
 
+export const MAX_LENGTH_COMMENT = 300;
+
+export const MAX_NEAR_OFFERS_COUNT = 3;
+
+export const MAX_IMAGES_COUNT = 6;
+
+export const MAX_REVIEWS_COUNT = 10;
+
+export const MIN_LENGTH_PASSWORD = 2;
+
 export enum PlacesOption {
   Popular = 'Popular',
   Price_to_high = 'Price: low to high',
@@ -23,19 +33,6 @@ export const enum HousingTypes {
   hotel = 'hotel'
 }
 
-export const OfferInsideItems = [
-  'Wi-Fi',
-  'Washing machine',
-  'Towels',
-  'Heating',
-  'Coffee machine',
-  'Baby seat',
-  'Kitchen',
-  'Dishwasher',
-  'Cabel TV',
-  'Fridge'
-] as const;
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -50,7 +47,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const RatingValues = [5, 4, 3, 2, 1] as const;
+export enum RatingValues {
+  Perfect = '5',
+  Good = '4',
+  Normal = '3',
+  Bad = '2',
+  'Not Bad' = '1'
+}
 
 export const URL_MARKER_DEFAULT =
   '/img/pin.svg';
@@ -139,3 +142,7 @@ export enum StatusLoading {
   Failed,
 }
 
+export enum ErrorMessages {
+  Login = 'Enter a valid email address',
+  Password = 'The password must contain at least one letter and one number',
+}

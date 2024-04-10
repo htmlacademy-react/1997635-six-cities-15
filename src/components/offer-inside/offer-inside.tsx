@@ -1,12 +1,16 @@
-import { OfferInsideItems } from '../../const';
+
 import OfferInsideItem from './offer-inside-item';
 
-function OfferInside () {
+type OfferInsideProps = {
+  goods: [string];
+}
+
+function OfferInside ({goods}: OfferInsideProps) {
   return (
     <div className="offer__inside">
       <h2 className="offer__inside-title">What&apos;s inside</h2>
       <ul className="offer__inside-list">
-        {OfferInsideItems.map((item) => <OfferInsideItem key={item} item={item}/>)}
+        {goods.map((item) => <OfferInsideItem key={item} item={item}/>)}
       </ul>
     </div>
   );

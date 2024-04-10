@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import type { TOffer } from '../../types/offers';
 import { getStrStartWithCapitalLetters } from '../../utils';
 import { AppRoute } from '../../const';
-import Premium from '../ui/premium';
-import Favorite from '../ui/favorite';
-import Rating from '../ui/rating';
+import MemorizedFavorite from '../ui/favorite';
+import MemorizedPremium from '../ui/premium';
+import MemorizedRating from '../ui/rating';
 
 type OfferItemProps = {
   offer: TOffer;
@@ -34,7 +34,7 @@ function OfferItem ({offer, isOfferItem, isFavorites, handleOfferHover}: OfferIt
       onMouseEnter={() => handleOfferHover && handleOfferHover(offer)}
       onMouseLeave={() => handleOfferHover && handleOfferHover()}
     >
-      {isPremium && <Premium isOfferCard/>}
+      {isPremium && <MemorizedPremium isOfferCard/>}
       <div className={`${offerItemClass}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img className="place-card__image" src={previewImage} width={imageWidth} height={imageHeight} alt={title}/>
@@ -46,9 +46,9 @@ function OfferItem ({offer, isOfferItem, isFavorites, handleOfferHover}: OfferIt
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Favorite isOfferCard isFavorite={isFavorite} id={id}/>
+          <MemorizedFavorite isOfferCard isFavorite={isFavorite} id={id}/>
         </div>
-        <Rating isOfferCard rating={rating}/>
+        <MemorizedRating isOfferCard rating={rating}/>
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>

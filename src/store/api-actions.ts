@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { APIRoute, AuthorizationStatus } from '../const';
+import { APIRoute } from '../const';
 import { TFullOffer, TOffer } from '../types/offers';
 import { AuthData } from '../types/auth-data';
-import { UserData } from '../types/user-data';
+import { AuthUserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { TReview, TReviewForm } from '../types/reviews';
 
@@ -99,7 +99,7 @@ export const postFavoriteStatus = createAsyncThunk<TFullOffer, {id: string; isFa
   }
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<AuthUserData, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -107,11 +107,12 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 >(
   'user/checkAuth',
   async (_arg, {extra: api}) => {
-    await api.get<AuthorizationStatus>(APIRoute.Login);
+    const response = await api.get<AuthUserData>(APIRoute.Login);
+    return response.data;
   }
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, {
+export const loginAction = createAsyncThunk<AuthUserData, AuthData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -119,8 +120,9 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 >(
   'user/login',
   async ({login: email, password}, {extra: api}) => {
-    const {data: {token, email: userEmail}} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(token, userEmail);
+    const response = await api.post<AuthUserData>(APIRoute.Login, {email, password});
+    saveToken(response.data.token, response.data.email);
+    return response.data;
   },
 );
 

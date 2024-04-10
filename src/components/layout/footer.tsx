@@ -1,9 +1,10 @@
-import Logo from '../ui/logo';
+import { memo } from 'react';
+import MemorizedLogo from '../ui/logo';
 
 function Footer () {
   return (
     <footer className="footer container">
-      <Logo
+      <MemorizedLogo
         isHeader={false}
         linkClassName=''
       />
@@ -11,4 +12,6 @@ function Footer () {
   );
 }
 
-export default Footer;
+const MemorizedFooter = memo(Footer);
+
+export default MemorizedFooter;
