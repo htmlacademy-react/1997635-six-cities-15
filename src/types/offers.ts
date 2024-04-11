@@ -1,4 +1,4 @@
-import { HousingTypes, Locations } from '../const';
+import { Locations } from '../const';
 
 export type TCityOffer = {
   name: keyof typeof Locations;
@@ -18,7 +18,7 @@ export type TLocationOffer = {
 export type TOffer = {
   id: string;
   title: string;
-  type: keyof typeof HousingTypes;
+  type: 'apartment' | 'room' | 'house' | 'hotel';
   price: number;
   city: TCityOffer;
   location: TLocationOffer;

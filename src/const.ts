@@ -27,13 +27,6 @@ export enum Locations {
   Dusseldorf = 'Dusseldorf'
 }
 
-export const enum HousingTypes {
-  apartment = 'apartment',
-  room = 'room',
-  house = 'house',
-  hotel = 'hotel'
-}
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
