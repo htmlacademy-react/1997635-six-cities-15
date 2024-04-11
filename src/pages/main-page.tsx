@@ -32,11 +32,11 @@ function MainPage(): JSX.Element {
     setSortOffers(getSortOffersList(sortType, currentOffers));
   }, [offers, sortType, currentOffers]);
 
-  const handleOfferHover = useCallback((offer?: TOffer) => {
+  const onOfferHover = useCallback((offer?: TOffer) => {
     setActiveOffer(offer || null);
   }, []);
 
-  const handleSortActive = useCallback((activeSortType: PlacesOption) => {
+  const onSortActive = useCallback((activeSortType: PlacesOption) => {
     if(activeSortType !== sortType) {
       setSortType(activeSortType);
     }
@@ -68,11 +68,11 @@ function MainPage(): JSX.Element {
                       <use xlinkHref="#icon-arrow-select"></use>
                     </svg>
                   </span>
-                  <Sort handleSortActive={handleSortActive} currentSortType={sortType} showSort={showSort}/>
+                  <Sort onSortActive={onSortActive} currentSortType={sortType} showSort={showSort}/>
                 </form>
                 <Offers
                   offers={sortOffers}
-                  handleOfferHover={handleOfferHover}
+                  onOfferHover={onOfferHover}
                 />
               </section>
               <div className="cities__right-section">

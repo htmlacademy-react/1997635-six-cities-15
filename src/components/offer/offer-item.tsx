@@ -10,10 +10,10 @@ type OfferItemProps = {
   offer: TOffer;
   isOfferItem?: boolean;
   isFavorites?: boolean;
-  handleOfferHover?: (offer?: TOffer) => void;
+  onOfferHover?: (offer?: TOffer) => void;
 }
 
-function OfferItem ({offer, isOfferItem, isFavorites, handleOfferHover}: OfferItemProps) : JSX.Element {
+function OfferItem ({offer, isOfferItem, isFavorites, onOfferHover}: OfferItemProps) : JSX.Element {
   const {id, title, type, price, previewImage, isFavorite, isPremium, rating} = offer;
 
   let offerItemClass = 'near-places';
@@ -31,8 +31,8 @@ function OfferItem ({offer, isOfferItem, isFavorites, handleOfferHover}: OfferIt
   return (
     <article
       className={`${offerItemClass}__card place-card`}
-      onMouseEnter={() => handleOfferHover && handleOfferHover(offer)}
-      onMouseLeave={() => handleOfferHover && handleOfferHover()}
+      onMouseEnter={() => onOfferHover && onOfferHover(offer)}
+      onMouseLeave={() => onOfferHover && onOfferHover()}
     >
       {isPremium && <MemorizedPremium isOfferCard/>}
       <div className={`${offerItemClass}__image-wrapper place-card__image-wrapper`}>

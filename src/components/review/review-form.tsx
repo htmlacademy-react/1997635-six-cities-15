@@ -37,7 +37,7 @@ function ReviewForm ({id}: ReviewFormProps) {
     }
   }, [statusLoading]);
 
-  const handleRatingChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
+  const onRatingChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
     setFormValues({
       ...formValues,
       rating: Number(target.value)
@@ -55,7 +55,7 @@ function ReviewForm ({id}: ReviewFormProps) {
       <RatingForm
         isLoading={isLoading}
         rating={formValues.rating}
-        handleRatingChange={handleRatingChange}
+        onRatingChange={onRatingChange}
       />
       <textarea
         className="reviews__textarea form__textarea"

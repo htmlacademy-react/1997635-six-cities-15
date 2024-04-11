@@ -5,10 +5,10 @@ import { RatingValues } from '../../const';
 type RatingFormProps = {
   isLoading: boolean;
   rating: number | null;
-  handleRatingChange: ({target}: ChangeEvent<HTMLInputElement>) => void;
+  onRatingChange: ({target}: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function RatingForm ({isLoading, rating, handleRatingChange } : RatingFormProps) {
+function RatingForm ({isLoading, rating, onRatingChange } : RatingFormProps) {
   return (
     <div className="reviews__rating-form form__rating">
       {(Object.keys(RatingValues) as Array<keyof typeof RatingValues>).map((value) => (
@@ -18,7 +18,7 @@ function RatingForm ({isLoading, rating, handleRatingChange } : RatingFormProps)
           label={value}
           isLoading={isLoading}
           rating={rating}
-          handleRatingChange={handleRatingChange}
+          onRatingChange={onRatingChange}
         />))}
     </div>
   );

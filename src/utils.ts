@@ -6,11 +6,11 @@ const getStrStartWithCapitalLetters = (data: string) => data.replace(data[0], da
 
 const getSortOffersList = (sort: PlacesOption, offers: TOffer[]) => {
   switch(sort) {
-    case PlacesOption.Price_to_high:
+    case PlacesOption.PriceToHigh:
       return offers.slice().sort((offerA, offerB) => offerA.price - offerB.price);
-    case PlacesOption.Price_to_low:
+    case PlacesOption.PriceToLow:
       return offers.slice().sort((offerA, offerB) => offerB.price - offerA.price);
-    case PlacesOption.Top_rated:
+    case PlacesOption.TopRated:
       return offers.slice().sort((offerA, offerB) => offerB.rating - offerA.rating);
     case PlacesOption.Popular:
     default:
@@ -57,7 +57,7 @@ const getShownReviews = (reviews: TReview[]) => {
   return sortReviews.slice(0, MAX_REVIEWS_COUNT);
 };
 
-const getImagesFromGallery = (images: [string]) => {
+const getImagesFromGallery = (images: string[]) => {
   if(images.length <= MAX_IMAGES_COUNT) {
     return images;
   }
