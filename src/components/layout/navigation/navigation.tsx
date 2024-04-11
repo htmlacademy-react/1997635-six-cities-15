@@ -41,10 +41,9 @@ function Navigation () : JSX.Element {
       <ul className="header__nav-list">
         <li className={`header__nav-item${isAuth ? ' user' : ''}`}>
           <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
+            <div className="header__avatar-wrapper user__avatar-wrapper"></div>
             {isAuth ? (
               <>
-                <div className="header__avatar-wrapper user__avatar-wrapper">
-                </div>
                 <span className="header__user-name user__name">{userEmail}</span>
                 <span className="header__favorite-count">{favoritesCount}</span>
               </>

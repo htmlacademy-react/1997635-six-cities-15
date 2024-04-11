@@ -35,7 +35,7 @@ function Favorite ({isOfferCard, isFavorite, id} : FavoriteProps) : JSX.Element 
 
   return (
     <button
-      className={`${favoriteClass}__bookmark-button button ${isFavorite ? ` ${favoriteClass}__bookmark-button--active` : ''}`} type="button"
+      className={`${favoriteClass}__bookmark-button button ${isFavorite && (authorizationStatus === AuthorizationStatus.Auth) ? ` ${favoriteClass}__bookmark-button--active` : ''}`} type="button"
       onClick={handleClick}
     >
       <svg className={`${favoriteClass}__bookmark-icon`} width={isOfferCard ? 18 : 31} height={isOfferCard ? 19 : 33}>
