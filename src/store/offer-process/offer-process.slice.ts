@@ -18,6 +18,12 @@ export const offerProcess = createSlice({
       if(state.currentOffer?.id === action.payload.id) {
         state.currentOffer.isFavorite = action.payload.isFavorite;
       }
+    },
+    changeFavoriteInNearOffers: (state, action: PayloadAction<{id: string; isFavorite: boolean}>) => {
+      const findIndex = state.nearOffers.findIndex((offer) => offer.id === action.payload.id);
+      if(findIndex >= 0) {
+        state.nearOffers[findIndex].isFavorite = action.payload.isFavorite;
+      }
     }
   },
   extraReducers(builder) {
@@ -45,4 +51,4 @@ export const offerProcess = createSlice({
   }
 });
 
-export const {changeFavoriteInOffer} = offerProcess.actions;
+export const {changeFavoriteInOffer, changeFavoriteInNearOffers} = offerProcess.actions;
