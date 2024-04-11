@@ -145,4 +145,5 @@ export enum StatusLoading {
 export enum ErrorMessages {
   Login = 'Enter a valid email address',
   Password = 'The password must contain at least one letter and one number',
+  Post = 'Failed to send data',
 }

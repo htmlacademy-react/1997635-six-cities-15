@@ -6,6 +6,7 @@ import { changeFavoriteInOffer } from '../../store/offer-process/offer-process.s
 import { changeFavoriteInOffers } from '../../store/offers-process/offers-process.slice';
 import { selectAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { selectStatusLoading } from '../../store/favorites-process/favorites-process.selectors';
 
 type FavoriteProps = {
   isOfferCard: boolean;
@@ -16,6 +17,7 @@ type FavoriteProps = {
 function Favorite ({isOfferCard, isFavorite, id} : FavoriteProps) : JSX.Element {
   const favoriteClass = isOfferCard ? 'place-card' : 'offer';
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const statusLoading = useAppSelector(selectStatusLoading);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -32,6 +34,14 @@ function Favorite ({isOfferCard, isFavorite, id} : FavoriteProps) : JSX.Element 
       }
     }
   };
+
+  /*
+  if(!checkPasswordValue){
+      toast.warn(ErrorMessages.Password, {
+        position: 'bottom-right'
+      });
+    }
+  */
 
   return (
     <button

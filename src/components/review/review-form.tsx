@@ -1,10 +1,11 @@
 import { useState, ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
-import { MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, StatusLoading } from '../../const';
+import { ErrorMessages, MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, StatusLoading } from '../../const';
 import { TReviewForm } from '../../types/reviews';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { selectStatusLoading } from '../../store/comments-process/comments-process.selectors';
 import RatingForm from '../rating-form/rating-form';
+import { toast } from 'react-toastify';
 
 type ReviewFormProps = {
   id: string | undefined;
@@ -29,6 +30,10 @@ function ReviewForm ({id}: ReviewFormProps) {
   useEffect(() => {
     if(statusLoading === StatusLoading.Success) {
       setFormValues({rating: null, comment: ''});
+    } else if (statusLoading === StatusLoading.Failed) {
+      toast.warn(ErrorMessages.Post, {
+        position: 'bottom-right'
+      });
     }
   }, [statusLoading]);
 
