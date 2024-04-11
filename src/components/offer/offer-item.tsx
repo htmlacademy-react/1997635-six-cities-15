@@ -5,7 +5,6 @@ import { AppRoute } from '../../const';
 import MemorizedFavorite from '../ui/favorite';
 import MemorizedPremium from '../ui/premium';
 import MemorizedRating from '../ui/rating';
-import Favorite from '../ui/favorite';
 
 type OfferItemProps = {
   offer: TOffer;
@@ -47,7 +46,7 @@ function OfferItem ({offer, isOfferItem, isFavorites, handleOfferHover}: OfferIt
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Favorite isOfferCard isFavorite={isFavorite} id={id}/>
+          <MemorizedFavorite isOfferCard isFavorite={isFavorite} id={id}/>
         </div>
         <MemorizedRating isOfferCard rating={rating}/>
         <h2 className="place-card__name">
