@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
-import { ErrorMessages, MAX_LENGTH_COMMENT, MIN_LENGTH_COMMENT, StatusLoading } from '../../const';
+import { ErrorMessages, LengthComment, StatusLoading } from '../../const';
 import { TReviewForm } from '../../types/reviews';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
@@ -69,14 +69,14 @@ function ReviewForm ({id}: ReviewFormProps) {
             comment: target.value
           });
         }}
-        maxLength={MAX_LENGTH_COMMENT}
+        maxLength={LengthComment.Max}
         disabled={isLoading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={isLoading || !(formValues.rating && formValues.comment.length >= MIN_LENGTH_COMMENT)}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isLoading || !(formValues.rating && formValues.comment.length >= (LengthComment.Min as number))}>Submit</button>
       </div>
     </form>
   );

@@ -1,6 +1,7 @@
-export const MIN_LENGTH_COMMENT = 50;
-
-export const MAX_LENGTH_COMMENT = 300;
+export enum LengthComment {
+  Max = 300,
+  Min = 50,
+}
 
 export const MAX_NEAR_OFFERS_COUNT = 3;
 
