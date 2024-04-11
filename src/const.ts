@@ -12,9 +12,9 @@ export const MIN_LENGTH_PASSWORD = 2;
 
 export enum PlacesOption {
   Popular = 'Popular',
-  Price_to_high = 'Price: low to high',
-  Price_to_low = 'Price: high to low',
-  Top_rated = 'Top rated first'
+  PriceToHigh = 'Price: low to high',
+  PriceToLow = 'Price: high to low',
+  TopRated = 'Top rated first'
 }
 
 export enum Locations {
