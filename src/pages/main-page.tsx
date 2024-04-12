@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Nullable } from 'vitest';
 import Map from '../components/map/map';
 import Offers from '../components/offer/offers';
@@ -19,18 +19,10 @@ function MainPage(): JSX.Element {
   const offers = useAppSelector(selectOffers);
   const currentCity = useAppSelector(selectCity);
 
-  const [currentOffers, setCurrentOffers] = useState<TOffer[]>(getCurrentOffersList(offers, currentCity));
-  const [sortOffers, setSortOffers] = useState<TOffer[]>(currentOffers);
-
-  useEffect(() => {
-    if (currentCity) {
-      setCurrentOffers(getCurrentOffersList(offers, currentCity));
-    }
-  }, [offers, currentCity]);
-
-  useEffect(() => {
-    setSortOffers(getSortOffersList(sortType, currentOffers));
-  }, [offers, sortType, currentOffers]);
+  const sortOffers = useMemo(() => {
+    const currentOffers = getCurrentOffersList(offers, currentCity);
+    return getSortOffersList(sortType, currentOffers);
+  }, [offers, currentCity, sortType]);
 
   const onOfferHover = useCallback((offer?: TOffer) => {
     setActiveOffer(offer || null);
@@ -43,7 +35,7 @@ function MainPage(): JSX.Element {
     setShowSort(!showSort);
   }, [showSort, sortType]);
 
-  const isEmptyOffers = currentOffers.length === 0;
+  const isEmptyOffers = sortOffers.length === 0;
 
   return (
     <main className={`page__main page__main--index${isEmptyOffers ? ' page__main--index-empty' : ''}`}>
@@ -55,7 +47,7 @@ function MainPage(): JSX.Element {
             <>
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{currentOffers.length} place{currentOffers.length !== 1 ? 's' : ''} to stay in {currentCity}</b>
+                <b className="places__found">{sortOffers.length} place{sortOffers.length !== 1 ? 's' : ''} to stay in {currentCity}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by </span>
                   <span
@@ -77,7 +69,7 @@ function MainPage(): JSX.Element {
               </section>
               <div className="cities__right-section">
                 <Map
-                  offers={currentOffers}
+                  offers={sortOffers}
                   activeOffer={activeOffer}
                 />
               </div>
