@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Nullable } from 'vitest';
 import Map from '../components/map/map';
 import Offers from '../components/offer/offers';
@@ -19,31 +19,23 @@ function MainPage(): JSX.Element {
   const offers = useAppSelector(selectOffers);
   const currentCity = useAppSelector(selectCity);
 
-  const [currentOffers, setCurrentOffers] = useState<TOffer[]>(getCurrentOffersList(offers, currentCity));
-  const [sortOffers, setSortOffers] = useState<TOffer[]>(currentOffers);
+  const sortOffers = useMemo(() => {
+    const currentOffers = getCurrentOffersList(offers, currentCity);
+    return getSortOffersList(sortType, currentOffers);
+  }, [offers, currentCity, sortType]);
 
-  useEffect(() => {
-    if (currentCity) {
-      setCurrentOffers(getCurrentOffersList(offers, currentCity));
-    }
-  }, [offers, currentCity]);
-
-  useEffect(() => {
-    setSortOffers(getSortOffersList(sortType, currentOffers));
-  }, [offers, sortType, currentOffers]);
-
-  const handleOfferHover = useCallback((offer?: TOffer) => {
+  const onOfferHover = useCallback((offer?: TOffer) => {
     setActiveOffer(offer || null);
   }, []);
 
-  const handleSortActive = useCallback((activeSortType: PlacesOption) => {
+  const onSortActive = useCallback((activeSortType: PlacesOption) => {
     if(activeSortType !== sortType) {
       setSortType(activeSortType);
     }
     setShowSort(!showSort);
   }, [showSort, sortType]);
 
-  const isEmptyOffers = currentOffers.length === 0;
+  const isEmptyOffers = sortOffers.length === 0;
 
   return (
     <main className={`page__main page__main--index${isEmptyOffers ? ' page__main--index-empty' : ''}`}>
@@ -55,7 +47,7 @@ function MainPage(): JSX.Element {
             <>
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{currentOffers.length} place{currentOffers.length !== 1 ? 's' : ''} to stay in {currentCity}</b>
+                <b className="places__found">{sortOffers.length} place{sortOffers.length !== 1 ? 's' : ''} to stay in {currentCity}</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by </span>
                   <span
@@ -68,16 +60,16 @@ function MainPage(): JSX.Element {
                       <use xlinkHref="#icon-arrow-select"></use>
                     </svg>
                   </span>
-                  <Sort handleSortActive={handleSortActive} currentSortType={sortType} showSort={showSort}/>
+                  <Sort onSortActive={onSortActive} currentSortType={sortType} showSort={showSort}/>
                 </form>
                 <Offers
                   offers={sortOffers}
-                  handleOfferHover={handleOfferHover}
+                  onOfferHover={onOfferHover}
                 />
               </section>
               <div className="cities__right-section">
                 <Map
-                  offers={currentOffers}
+                  offers={sortOffers}
                   activeOffer={activeOffer}
                 />
               </div>

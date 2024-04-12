@@ -3,4 +3,6 @@ import { State } from '../../types/state';
 
 const selectFavorites = (state: State) => state[NameSpace.Favorite].favorites;
 
-export {selectFavorites};
+const selectStatusLoading = (state: State) => state[NameSpace.Favorite].statusLoading;
+
+export {selectFavorites, selectStatusLoading};

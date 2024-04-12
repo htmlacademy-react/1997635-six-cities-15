@@ -2,7 +2,7 @@ import { getImagesFromGallery } from '../../utils';
 import GalleryItem from './gallery-item';
 
 type GalleryProps = {
-  images: [string];
+  images: string[];
 }
 
 function Gallery ({images}: GalleryProps) : JSX.Element {

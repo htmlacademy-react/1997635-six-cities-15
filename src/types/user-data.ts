@@ -1,9 +1,3 @@
-export type UserData = {
-  id: number;
-  email: string;
-  token: string;
-};
-
 export type AuthUserData = {
   name: string;
   avatarUrl: string;

@@ -1,6 +1,7 @@
-export const MIN_LENGTH_COMMENT = 50;
-
-export const MAX_LENGTH_COMMENT = 300;
+export enum LengthComment {
+  Max = 300,
+  Min = 50,
+}
 
 export const MAX_NEAR_OFFERS_COUNT = 3;
 
@@ -12,9 +13,9 @@ export const MIN_LENGTH_PASSWORD = 2;
 
 export enum PlacesOption {
   Popular = 'Popular',
-  Price_to_high = 'Price: low to high',
-  Price_to_low = 'Price: high to low',
-  Top_rated = 'Top rated first'
+  PriceToHigh = 'Price: low to high',
+  PriceToLow = 'Price: high to low',
+  TopRated = 'Top rated first'
 }
 
 export enum Locations {
@@ -24,13 +25,6 @@ export enum Locations {
   Amsterdam = 'Amsterdam',
   Hamburg = 'Hamburg',
   Dusseldorf = 'Dusseldorf'
-}
-
-export const enum HousingTypes {
-  apartment = 'apartment',
-  room = 'room',
-  house = 'house',
-  hotel = 'hotel'
 }
 
 export enum AppRoute {
@@ -145,4 +139,5 @@ export enum StatusLoading {
 export enum ErrorMessages {
   Login = 'Enter a valid email address',
   Password = 'The password must contain at least one letter and one number',
+  Post = 'Failed to send data',
 }

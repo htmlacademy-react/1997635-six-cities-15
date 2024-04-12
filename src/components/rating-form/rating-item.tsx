@@ -5,10 +5,10 @@ type RatingItemProps = {
   label: string;
   isLoading: boolean;
   rating: number | null;
-  handleRatingChange: ({target}: ChangeEvent<HTMLInputElement>) => void;
+  onRatingChange: ({target}: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function RatingItem ({value, label, isLoading, rating, handleRatingChange } : RatingItemProps) {
+function RatingItem ({value, label, isLoading, rating, onRatingChange } : RatingItemProps) {
   return (
     <Fragment key={value}>
       <input
@@ -17,7 +17,7 @@ function RatingItem ({value, label, isLoading, rating, handleRatingChange } : Ra
         value={value}
         id={`${value}-stars`}
         type="radio"
-        onChange={(event) => handleRatingChange(event)}
+        onChange={(event) => onRatingChange(event)}
         checked={Number(rating) === value}
         disabled={isLoading}
       />
